@@ -1,0 +1,658 @@
+
+
+<html>
+  <head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script src="../../plugins/jquery.min.js"></script>
+  
+  <link rel="stylesheet"  href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="../../style.css">
+  
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+  </head>
+  <body>
+    <!-- container -->
+    <div class="bookContainer">
+  <!-- side bar -->
+  <div class="bookSideBar">
+    <div class="homeLink">
+      <a href="intro.html">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        Karel
+      </a>
+    </div>
+    <hr/>
+  
+  <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+    <a class="bookLink btn btn-link" href="chapter1.html">
+      1 - ทำความรู้จักกับ Karel
+    </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+    <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+    <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+    <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหา </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+    <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+    <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+    <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+    <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+  </div>
+  <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+  
+  <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+    <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+  </div>
+  
+  <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+    <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+  </div>
+  
+  <hr />
+  
+    <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+  
+    <!-- <center>
+      <img style ="width:75px;" src="../../images/stanford.png"/>
+      </center> -->
+  </div>
+      <!-- content -->
+      <div class="bookContent" style="display: flex;">
+        <!-- right gutter -->
+        <div style="flex-grow:1;max-width:50px;"></div>
+  
+        <!-- main stuff -->
+        <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+  
+  <h1>บทที่ 6: While Loops</h1>
+  <hr/>
+  <p>
+    ในบางครั้ง ผู้ใช้มีความต้องการที่จะให้โปรแกรมทำงานบางอย่างซ้ำๆ แต่ไม่สามารถระบุจำนวนรอบที่ต้องการทำซ้ำ คำสั่ง for
+    ก็เลยไม่เหมาะที่จะใช้กับงานวนลูปในลักษณะที่ไม่รู้จำนวนรอบที่แน่นอน จึงมีอีกคำสั่งที่ใช้การตรวจสอบเงื่อนไขบางอย่าง
+    นั่นก็คือคำสั่ง while
+    ยกตัวอย่างปัญหา เช่น ถ้าต้องการให้หุ่นยนต์คาเรล เดินตรงไปเรื่อยๆ จนกระทั่งเจอกำแพงแล้วจึงค่อยหยุดการทำงาน
+    และต้องการใช้คำสั่งเดียวกันในการให้คาเรลทำการเดินหากำแพงที่โลกขนาดใดๆ ก็ได้ ลองกดปุ่ม “Run Program”
+    เพื่อดูการทำงานของหุ่นยนต์คาเรล
+ 
+  </p>
+  
+  <p>
+    ตัวอย่างเช่น หากเราต้องการเขียนโปรแกรมเพื่อให้คาเรลเคลื่อนที่ไปยังกำแพง แต่ไม่ต้องการให้โปรแกรมนี้ทำงานโดยที่มีรอบการเคลื่อนที่ที่แน่นอน เช่น สั่งให้คาเรลเดินทั้งหมด 3 ก้าว และหากทำการเปลี่ยนแผนที่ไปโปรแกรมดังที่บอกไปข้างต้นจะไม่สามารถทำงานได้ทันที เป็นต้น ดังนั้น เราควรจะเขียนโปรแกรมให้ครอบคลุมกับทุกแผนที่ที่สร้างขึ้น 
+  </p>
+  
+  
+  <div class="section embeddedIde" id="moveToWall">
+      <div id ='moveToWallIde' class = "ide getStarted" style="height:316.8px">
+        <div id = 'moveToWallIdeCenter' class = "ideCenter" >
+           <div id = 'moveToWallEditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
+           <div id = 'moveToWallCanvasDiv' class = 'ideCanvasDiv'>
+              <div class="worldDropdown">
+  
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Change World
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="moveToWallWorlds" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a>1x1</a></li>
+                    <li><a>4x4</a></li>
+                    <li><a>3x6</a></li>
+                    <li><a>7x7</a></li>
+                    <li><a>8x8</a></li>
+                  </ul>
+                </div>
+              </div>
+              <canvas id='moveToWallCanvas' class = 'ideCanvas'></canvas>
+           </div>
+        </div>
+      </div>
+      <div style="width:100%;">
+          <div class="buttonBar">
+             <button class="btn btn-default" id="moveToWallRunButton"><span class="glyphicon glyphicon-play"></span> Run Program</button>
+          </div>
+      </div>
+  <script>
+  
+  
+  
+  function examplemoveToWall() {
+  STARTER_CODE = `
+  # File: MoveToWall.py
+  # ------------------------------
+  # Uses a "while" loop to move Karel until it hits
+  # a wall. Works on any sized world.
+  from karel.stanfordkarel import *
+  
+  # the program starts with main
+  def main():
+     # call the move to wall function
+     move_to_wall()
+  
+  # this is a very useful function
+  def move_to_wall():
+     # repeat the body while the condition holds
+     while front_is_clear():
+        move()
+  
+  
+  `
+  // because of that extra endline at the start of the string
+  STARTER_CODE = STARTER_CODE.trim();
+  
+   var karelIde = null;
+   var karelEditor = null;
+   var buttonState = 'play';
+  
+   function main() {
+     karelEditor = importPythonEditor('moveToWallEditor','moveToWallEditorDiv', STARTER_CODE, false);
+      setupWorldDropdown();
+  
+  
+      var canvas = document.getElementById('moveToWallCanvas');
+      karelIde = KarelIde('python',karelEditor, canvas, '7x7', 0.8, 'en');
+      $('#moveToWallRunButton').click(function(){playClicked()});
+      onresize();
+  
+   }
+  
+   function setupWorldDropdown() {
+      console.log('setup world dropdown')
+      let ul = document.getElementById('moveToWallWorlds')
+  
+      if (!ul.childNodes || ul.childNodes.length == 0) return;
+  
+      // Iterate LIs
+      for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+          var li = ul.childNodes[itemi];
+          if(li.nodeName == "LI") {
+            var a = li.childNodes[0]
+            let worldName = a.innerHTML;
+            console.log(worldName)
+            a.onclick = () => setWorld(worldName);
+  
+          }
+      }
+   }
+  
+   function setWorld(worldName){
+      console.log('here we go', worldName)
+      karelIde.changeWorld(worldName)
+      changeToPlayButton()
+   }
+  
+   function playClicked() {
+    if(buttonState == 'play') {
+      karelIde.playButton();
+      changeToResetButton();
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      changeToPlayButton();
+     }
+    }
+  
+    function changeToPlayButton() {
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#moveToWallRunButton').html(playText);
+      buttonState = 'play';
+    }
+  
+    function changeToResetButton() {
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#moveToWallRunButton').html(resetText);
+      buttonState = 'reset';
+    }
+  
+   function onresize() {
+      var parentHeight = 316.8;
+      var canvasWidth = 300
+      var parentWidth = $("#moveToWall").width();
+      console.log('pw: ' + parentWidth);
+  
+      var ide = document.getElementById('moveToWallIde');
+      var editorDiv = document.getElementById('moveToWallEditorDiv');
+      var canvas = document.getElementById('moveToWallCanvasDiv');
+  
+      var ideHeight = parentHeight
+      var centerHeight = ideHeight;
+  
+      var availibleWidth = parentWidth;
+      var elementSpacing = 12;
+  
+      var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+  
+      canvas.style.width = canvasWidth + 'px';
+      canvas.style.height = canvasWidth + 'px';
+      canvas.style.left = (editorWidth + elementSpacing) + 'px';
+  
+  
+  
+      editorDiv.style.left = 0 + 'px'
+      editorDiv.style.width = editorWidth + 'px';
+      editorDiv.style.height = parentHeight + 'px';
+      console.log('editor width: ' + editorWidth)
+  
+      if (karelEditor) {
+         karelEditor.renderer.onResize();
+      }
+   }
+   main()
+  
+  }
+  examplemoveToWall();
+      </script>
+  </div>
+  <p>
+  ลองเปลี่ยนขนาดโลกของคาเรลโดยคลิกที่ “Change World” แล้วเปลี่ยนมิติขนาดโลกของคาเรล แล้วลองกดปุ่ม “Run Program”
+  อีกครั้งเพื่อดูการทำงาน จะสังเกตได้ว่าผู้ใช้จะไม่สามารถสั่งงานที่ต้องการวนซ้ำแบบนี้ด้วยคำสั่ง for
+    </p>
+  
+    <h3>พื้นฐาน While Loop</h3>
+  
+  <p>สำหรับคาเรล คำสั่ง while ถูกใช้สำหรับการสั่งการให้ทำงานซ้ำๆ ไปเรื่อยๆ จนกว่าจะผิดเงื่อนไขบางอย่าง
+  จึงค่อยหยุดการทำงานคำสั่ง while โครงสร้างภาษาไพธอนสำหรับคำสั่ง while คือ
+    while loop แทน โดยจะมีรูปแบบการเขียนโปรแกรมดังนี้ : </p>
+  <p class="demoCode">
+  <code><span class="keyword">while</span> </code><i class="demoText">test</i><code>:</code><br/>
+     <i class="demoText" style="margin-left:2em">statements to be repeated</i><br/>
+  </p>
+  
+  
+  
+  <p>
+  ผู้ใช้สามารถใช้คำสั่ง while โดยใส่เงื่อนไขที่ต้องการไปแทนใน “test” คำสั่ง while จะทำการตรวจสอบเงื่อนไข test ถ้าเป็นจริง
+  จะทำงานตามคำสั่งที่อยู่ใน code block ของ while แล้วกลับไปตรวจสอบเงื่อนไข test ต่อไป ถ้าผลการตรวจสอบเป็นเท็จ
+  ก็จะทำการข้ามคำสั่งที่อยู่ใน code block ของ while ไปทำคำสั่งอื่นๆ ที่อยู่นอก code block ของคำสั่ง while ต่อไป
+
+  หุ่นยนต์คาเรลมีชุดคำสั่งให้เลือกใช้ สำหรับใช้ในการ test ซึ่งจะกล่าวถึงในบทถัดไป สำหรับบทนี้ ขอให้เข้าใจว่า คำสั่ง
+  front_is_clear() จะคืนค่า “true” ทำให้เงื่อนไขเป็นจริง ก็ต่อเมื่อไม่มีกำแพงอยู่ข้างหน้าหุ่นยนต์คาเรล
+  </p>
+  
+  <h3>Fencepost Bug</h3>
+  
+  <p>
+  ลองปรับโปรแกรมจากด้านบนให้น่าสนใจมากขึ้น โดยให้คาเรลวางเหรียญ <i class="demoText">beeper</i> ทุกๆ ตำแหน่งที่เคยอยู่
+  และทดสอบโปรแกรมกับโลกของคาเรลหลายๆ ขนาดด้วย
+  </p>
+  
+  
+  <div class="section embeddedIde" id="beeperLineBug1">
+      <div id ='beeperLineBug1Ide' class = "ide getStarted" style="height:299.20000000000005px">
+        <div id = 'beeperLineBug1IdeCenter' class = "ideCenter" >
+           <div id = 'beeperLineBug1EditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
+           <div id = 'beeperLineBug1CanvasDiv' class = 'ideCanvasDiv'>
+              <div class="worldDropdown">
+  
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Change World
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="beeperLineBug1Worlds" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a>1x1</a></li>
+                    <li><a>4x4</a></li>
+                    <li><a>3x6</a></li>
+                    <li><a>7x7</a></li>
+                    <li><a>8x8</a></li>
+                  </ul>
+                </div>
+              </div>
+              <canvas id='beeperLineBug1Canvas' class = 'ideCanvas'></canvas>
+           </div>
+        </div>
+      </div>
+      <div style="width:100%;">
+          <div class="buttonBar">
+             <button class="btn btn-default" id="beeperLineBug1RunButton"><span class="glyphicon glyphicon-play"></span> Run Program</button>
+          </div>
+      </div>
+  <script>
+  
+  
+  
+  function examplebeeperLineBug1() {
+  STARTER_CODE = `
+  # File: BeeperLineBug.py
+  # ------------------------------
+  # Uses a while loop to place a line of beepers.
+  # This program works for a world of any size.
+  # However, because each world requires one fewer
+  # moves than put_beepers it always misses a beeper.
+  from karel.stanfordkarel import *
+  
+  # program starts at main
+  def main():
+     # repeats until karel faces a wall
+     while front_is_clear():
+        # place a beeper on current square
+        put_beeper()
+        # move to the next square
+        move()
+  
+  `
+  // because of that extra endline at the start of the string
+  STARTER_CODE = STARTER_CODE.trim();
+  
+   var karelIde = null;
+   var karelEditor = null;
+   var buttonState = 'play';
+  
+   function main() {
+     karelEditor = importPythonEditor('beeperLineBug1Editor','beeperLineBug1EditorDiv', STARTER_CODE, true);
+      setupWorldDropdown();
+  
+  
+      var canvas = document.getElementById('beeperLineBug1Canvas');
+      karelIde = KarelIde('python',karelEditor, canvas, '7x7', 0.8, 'en');
+      $('#beeperLineBug1RunButton').click(function(){playClicked()});
+      onresize();
+  
+   }
+  
+   function setupWorldDropdown() {
+      console.log('setup world dropdown')
+      let ul = document.getElementById('beeperLineBug1Worlds')
+  
+      if (!ul.childNodes || ul.childNodes.length == 0) return;
+  
+      // Iterate LIs
+      for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+          var li = ul.childNodes[itemi];
+          if(li.nodeName == "LI") {
+            var a = li.childNodes[0]
+            let worldName = a.innerHTML;
+            console.log(worldName)
+            a.onclick = () => setWorld(worldName);
+  
+          }
+      }
+   }
+  
+   function setWorld(worldName){
+      console.log('here we go', worldName)
+      karelIde.changeWorld(worldName)
+      changeToPlayButton()
+   }
+  
+   function playClicked() {
+    if(buttonState == 'play') {
+      karelIde.playButton();
+      changeToResetButton();
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      changeToPlayButton();
+     }
+    }
+  
+    function changeToPlayButton() {
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#beeperLineBug1RunButton').html(playText);
+      buttonState = 'play';
+    }
+  
+    function changeToResetButton() {
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#beeperLineBug1RunButton').html(resetText);
+      buttonState = 'reset';
+    }
+  
+   function onresize() {
+      var parentHeight = 299.20000000000005;
+      var canvasWidth = 300
+      var parentWidth = $("#beeperLineBug1").width();
+      console.log('pw: ' + parentWidth);
+  
+      var ide = document.getElementById('beeperLineBug1Ide');
+      var editorDiv = document.getElementById('beeperLineBug1EditorDiv');
+      var canvas = document.getElementById('beeperLineBug1CanvasDiv');
+  
+      var ideHeight = parentHeight
+      var centerHeight = ideHeight;
+  
+      var availibleWidth = parentWidth;
+      var elementSpacing = 12;
+  
+      var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+  
+      canvas.style.width = canvasWidth + 'px';
+      canvas.style.height = canvasWidth + 'px';
+      canvas.style.left = (editorWidth + elementSpacing) + 'px';
+  
+  
+  
+      editorDiv.style.left = 0 + 'px'
+      editorDiv.style.width = editorWidth + 'px';
+      editorDiv.style.height = parentHeight + 'px';
+      console.log('editor width: ' + editorWidth)
+  
+      if (karelEditor) {
+         karelEditor.renderer.onResize();
+      }
+   }
+   main()
+  
+  }
+  examplebeeperLineBug1();
+      </script>
+  </div>
+  
+  <p>
+    จากโปรแกรม BeeperLineBug คาเรลสามารถวางเหรียญได้ตามทางที่เดินไป
+    แต่ติดปัญหาตรงที่คาเรลไม่ได้วางเหรียญที่ตำแหน่งสุดท้ายตอนที่เดินเจอกำแพง เพราะหลังจากที่คาเรลเจอกำแพง ก็จะไม่ทำงานใน
+    code block ของคำสั่ง while จากตัวอย่างข้างบน โลกของคาเรลมีมิติ 7x7 คาเรลควรจะวางเหรียญ 7 เหรียญ และควรทำการเดิน 6 ครั้ง
+    ผู้ใช้จะแก้ปัญหาอย่างไรได้บ้าง
+  </p>
+  
+  <p>
+    ข้อผิดพลาดในโปรแกรมนี้เป็นตัวอย่างของปัญหาที่เจอบ่อยในการเขียนโปรแกรมที่เรียกว่า Fencepost Bug
+    ซึ่งชื่อนี้มาจากความจริงที่ว่า ถ้าเราต้องการสร้างรั้วและแผงกั้น เราจะต้องใช้จำนวนเสา มากกว่าจำนวนแผงกั้น 1 ต้น
+    ถ้าต้องการสร้างรั้วที่มีแผงกั้น 10 แผง ก็จะต้องใช้เสา 11 ต้น
+  </p>
+  
+  <center>
+  <img style ="width:500px;margin-bottom:10px" src="../../images/fencepost.png"/>
+  </center>
+  
+  <p>
+    หลังจากที่รู้ที่มาของปัญหา ข้อผิดพลาดนี้สามารถแก้ไขได้ค่อนข้างง่าย
+    โดยให้คาเรลวางเหรียญสุดท้ายก่อนที่จะหยุดการทำงานเพิ่มอีก 1 เหรียญ
+  </p>
+  
+  
+  <div class="section embeddedIde" id="beeperLine">
+      <div id ='beeperLineIde' class = "ide getStarted" style="height:334.40000000000003px">
+        <div id = 'beeperLineIdeCenter' class = "ideCenter" >
+           <div id = 'beeperLineEditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
+           <div id = 'beeperLineCanvasDiv' class = 'ideCanvasDiv'>
+              <div class="worldDropdown">
+  
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Change World
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="beeperLineWorlds" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a>1x1</a></li>
+                    <li><a>4x4</a></li>
+                    <li><a>3x6</a></li>
+                    <li><a>7x7</a></li>
+                    <li><a>8x8</a></li>
+                  </ul>
+                </div>
+              </div>
+              <canvas id='beeperLineCanvas' class = 'ideCanvas'></canvas>
+           </div>
+        </div>
+      </div>
+      <div style="width:100%;">
+          <div class="buttonBar">
+             <button class="btn btn-default" id="beeperLineRunButton"><span class="glyphicon glyphicon-play"></span> Run Program</button>
+          </div>
+      </div>
+  <script>
+  
+  
+  
+  function examplebeeperLine() {
+  STARTER_CODE = `
+  
+  # File: BeeperLine.py
+  # ------------------------------
+  # Uses a while loop to place a line of beepers.
+  # This program works for a world of any size.
+  from karel.stanfordkarel import *
+  
+  # program starts at main
+  def main():
+     # repeats until karel faces a wall
+     while front_is_clear():
+        # place a beeper on current square
+        put_beeper()
+        # move to the next square
+        move()
+     # solves the fencepost bug
+     put_beeper()
+  
+  
+  `
+  // because of that extra endline at the start of the string
+  STARTER_CODE = STARTER_CODE.trim();
+  
+   var karelIde = null;
+   var karelEditor = null;
+   var buttonState = 'play';
+  
+   function main() {
+     karelEditor = importPythonEditor('beeperLineEditor','beeperLineEditorDiv', STARTER_CODE, true);
+      setupWorldDropdown();
+  
+  
+      var canvas = document.getElementById('beeperLineCanvas');
+      karelIde = KarelIde('python',karelEditor, canvas, '7x7', 0.8, 'en');
+      $('#beeperLineRunButton').click(function(){playClicked()});
+      onresize();
+  
+   }
+  
+   function setupWorldDropdown() {
+      console.log('setup world dropdown')
+      let ul = document.getElementById('beeperLineWorlds')
+  
+      if (!ul.childNodes || ul.childNodes.length == 0) return;
+  
+      // Iterate LIs
+      for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+          var li = ul.childNodes[itemi];
+          if(li.nodeName == "LI") {
+            var a = li.childNodes[0]
+            let worldName = a.innerHTML;
+            console.log(worldName)
+            a.onclick = () => setWorld(worldName);
+  
+          }
+      }
+   }
+  
+   function setWorld(worldName){
+      console.log('here we go', worldName)
+      karelIde.changeWorld(worldName)
+      changeToPlayButton()
+   }
+  
+   function playClicked() {
+    if(buttonState == 'play') {
+      karelIde.playButton();
+      changeToResetButton();
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      changeToPlayButton();
+     }
+    }
+  
+    function changeToPlayButton() {
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#beeperLineRunButton').html(playText);
+      buttonState = 'play';
+    }
+  
+    function changeToResetButton() {
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#beeperLineRunButton').html(resetText);
+      buttonState = 'reset';
+    }
+  
+   function onresize() {
+      var parentHeight = 334.40000000000003;
+      var canvasWidth = 300
+      var parentWidth = $("#beeperLine").width();
+      console.log('pw: ' + parentWidth);
+  
+      var ide = document.getElementById('beeperLineIde');
+      var editorDiv = document.getElementById('beeperLineEditorDiv');
+      var canvas = document.getElementById('beeperLineCanvasDiv');
+  
+      var ideHeight = parentHeight
+      var centerHeight = ideHeight;
+  
+      var availibleWidth = parentWidth;
+      var elementSpacing = 12;
+  
+      var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+  
+      canvas.style.width = canvasWidth + 'px';
+      canvas.style.height = canvasWidth + 'px';
+      canvas.style.left = (editorWidth + elementSpacing) + 'px';
+  
+  
+  
+      editorDiv.style.left = 0 + 'px'
+      editorDiv.style.width = editorWidth + 'px';
+      editorDiv.style.height = parentHeight + 'px';
+      console.log('editor width: ' + editorWidth)
+  
+      if (karelEditor) {
+         karelEditor.renderer.onResize();
+      }
+   }
+   main()
+  
+  }
+  examplebeeperLine();
+      </script>
+  </div><hr/>
+  <center>
+    <a class="btn btn-primary btn-lg" href="chapter7.html" role="button">บทถัดไป</a>
+  </center>
+  </p>
+  
+  <div style="height:60px"></div>        </div>
+        </div>
+  
+        </div>
+        <!-- right gutter -->
+        <div style="flex-grow:4"></div>
+      </div>
+    </div>
+  </body>
+  </html>
+  

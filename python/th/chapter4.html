@@ -1,0 +1,366 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+    <img style ="width:75px;" src="../../images/stanford.png"/>
+    </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1;max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 4: ถนนบนโลกคาเรลชำรุด</h1>
+            <hr />
+            <p>
+              เพื่อที่จะให้เห็นความสามารถพิเศษที่ได้เพิ่มเติมหลังจากการประกาศฟังก์ชันใหม่
+              จะเพิ่มเงื่อนไขให้หุ่นยนต์คาเรลทำงานมากขึ้น
+              จากภาพโลกของคาเรลด้านล่าง ถ้าต้องการให้คาเรลเดินบนถนนแถวที่ 2 จากซ้ายไปขวา โดยมีเงื่อนไขว่า
+              ในกรณีที่มีช่องว่างทางด้านขวา หุ่นยนต์คาเรลจะต้องนำเหรียญไปวางแทนที่ช่องว่างจนเต็มก่อนที่จะเดินผ่านไป
+
+            </p>
+
+
+            <div class="section" id="ba">
+              <div id='baIde' class="ide getStarted">
+                <div id='baCanvasDiv' class='commandCanvasDiv'>
+                  <div>
+                    <div class="commandCanvasTitle">Before:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='baCanvasBefore' style="width:300px;"></canvas>
+                    </div>
+                  </div>
+                  <div style="width:50px"></div>
+                  <div>
+                    <div class="commandCanvasTitle">After:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='baCanvasAfter' style="width:300px;"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+
+
+
+                function exampleba() {
+                  var karelIde = null;
+                  var buttonState = 'play';
+                  var canvas = null;
+
+                  function main() {
+                    canvas = document.getElementById('baCanvasBefore');
+                    karelIde = KarelIde('python', null, canvas, 'pothole', 0.9, 'en', 1000, 0.82 * 1000);
+
+                    let canvasGoal = document.getElementById('baCanvasAfter');
+                    let goalIde = KarelIde('python', null, canvasGoal, 'potholeGoal', 0.9, 'en', 1000, 0.82 * 1000)
+                  }
+
+
+                  main()
+
+                }
+                exampleba();
+              </script>
+            </div>
+            <p>
+              ถ้าผู้ใช้ถูกจำกัดให้ใช้คำสั่งได้เพียง 4 คำสั่งพื้นฐานของคาเรล ลำดับคำสั่งในฟังก์ชัน <code> main()</code>
+              สำหรับแก้ปัญหานี้
+              จะมีลักษณะตามโปรแกรมดังนี้:
+            </p>
+
+            <p style="margin-left:2em">
+              <code><span class="keyword">def</span> main():</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">put_beeper()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">turn_left()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+            </p>
+
+            <p>
+
+              บทก่อนหน้านี้ ผู้ใช้ได้ทำการสร้างฟังก์ชัน <code>turn_right()</code>
+              เพื่อลดการให้ลำดับคำสั่งดูซับซ้อนมากขึ้นเมื่อต้องคอยสั่ง
+              <code>turn_left()</code> สามครั้งสำหรับการหันขวา การประกาศฟังก์ชันใหม่มีประโยชน์สำคัญอีกอย่างคือ
+              สามารถแบ่งลำดับคำสั่งงานที่มีความซับซ้อนให้มีขนาดเล็กลงได้
+            </p>
+
+            <p>
+              จากตัวอย่างเงื่อนไขข้างต้น ผู้บังคับหุ่นสามารถกำหนดให้คาเรลทำงานเป็นลำดับขั้นแบบนี้ได้:
+            </p>
+
+            <ol>
+              <li> เดินตรงไป
+              <li> เอาเหรียญอุดรูที่กำแพง
+              <li> เดินตรงไป
+            </ol>
+
+            <p>
+              ถ้าจะเขียนโปรแกรมโดยวางวิธีแก้ปัญหาไว้แบบนี้ ผู้ใช้สามารถสร้างฟังก์ชัน <code>main</code> ออกมาได้ประมาณนี้
+            </p>
+
+            <p style="margin-left:2em">
+              <code><span class="keyword">def</span> main():</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">fill_pothole()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+            </p>
+
+            <p>
+              ตอนนี้ลำดับคำสั่งสำหรับควบคุมคาเรลนั้นดูดี เข้าใจง่าย ติดปัญหาเพียงตรงที่ จะทำอย่างไรให้คาเรลเข้าใจคำสั่ง
+              fill_pothole()
+              เพื่อที่จะอุดรูกำแพง จากเทคนิคการประกาศฟังก์ชันในบทก่อนหน้านี้ สามารถทำให้คาเรลเข้าใจคำสั่ง fill_pothole()
+              ด้วยการประกาศฟังก์ชันนี้ขึ้นมา พร้อมกับใส่ลำดับคำสั่งเพื่อเอาเหรียญไปอุดรูกำแพง ฟังก์ชัน fill_pothole()
+              ก็จะมีลักษณะดังภาพ
+
+            </p>
+
+            <p style="margin-left:2em">
+              <code><span class="keyword">def</span> fill_pothole():</code><br />
+              <code style="margin-left:2em">turn_right()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">put_beeper()</code><br />
+              <code style="margin-left:2em">turn_around()</code><br />
+              <code style="margin-left:2em">move()</code><br />
+              <code style="margin-left:2em">turn_right()</code><br />
+            </p>
+
+            <p>
+
+              ข้างล่างคือตัวอย่างโปรแกรมที่คาเรลเดินเอาเหรียญไปอุดรูกำแพง
+              โดยผู้ใช้สามารถเขียนฟังก์ชันที่มนุษย์พอจะเข้าใจได้ง่าย
+              และคาเรลก็สามารถทำงานได้ตรงตามที่ได้โปรแกรมไว้ ลองกดปุ่ม “Run Program”
+              แล้วสังเกตลำดับการทำงานของหุ่นยนต์โดยดูจากไฮไลท์ที่แสดงในหน้าต่าง IDE
+
+            </p>
+
+
+            <div class="section embeddedIde" id="pothole">
+              <div id='potholeIde' class="ide getStarted" style="height:516.2px">
+                <div id='potholeIdeCenter' class="ideCenter">
+                  <div id='potholeEditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                  <div id='potholeCanvasDiv' class='ideCanvasDiv'>
+                    <canvas id='potholeCanvas' class='ideCanvas'></canvas>
+                  </div>
+                </div>
+              </div>
+              <div style="width:100%;">
+                <div class="buttonBar">
+                  <button class="btn btn-default" id="potholeRunButton"><span class="glyphicon glyphicon-play"></span>
+                    Run Program</button>
+                </div>
+              </div>
+              <script>
+
+
+
+                function examplepothole() {
+                  STARTER_CODE = `
+from karel.stanfordkarel import *
+def main():
+   move()
+   fill_pothole()
+   move()
+
+# Fills the pothole beneath Karel's current position by 
+# placing a beeper on that corner. For this function to work 
+# correctly, Karel must be facing east immediately above the 
+# pothole. When execution is complete, Karel will have 
+# returned to the same square and will again be facing east.
+def fill_pothole():
+   turn_right()
+   move()
+   put_beeper()
+   turn_around()
+   move()
+   turn_right()
+
+# Turns Karel 90 degrees to the right. 
+def turn_right():
+   turn_left()
+   turn_left()
+   turn_left()
+
+# Turns Karel around 180 degrees. 
+def turn_around():
+   turn_left()
+   turn_left()`
+                  // because of that extra endline at the start of the string
+                  STARTER_CODE = STARTER_CODE.trim();
+
+                  var karelIde = null;
+                  var karelEditor = null;
+                  var buttonState = 'play';
+
+                  function main() {
+                    karelEditor = importPythonEditor('potholeEditor', 'potholeEditorDiv', STARTER_CODE, false);
+                    //importRunButtonBar('example1ButtonBar');
+
+                    $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                    initTabs();
+                    var canvas = document.getElementById('potholeCanvas');
+                    karelIde = KarelIde('python', karelEditor, canvas, 'pothole', 0.9, 'en');
+                    $('#potholeRunButton').click(function () { playClicked() });
+                    onresize();
+
+                  }
+
+                  function playClicked() {
+                    if (buttonState == 'play') {
+                      karelIde.playButton();
+
+                      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                      $('#potholeRunButton').html(resetText);
+                      buttonState = 'reset';
+                    } else if (buttonState == 'reset') {
+                      karelIde.stopButton();
+                      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                      $('#potholeRunButton').html(playText);
+                      buttonState = 'play';
+                    }
+
+                  }
+
+                  function onresize() {
+                    var parentHeight = 516.2;
+                    var canvasWidth = 200
+                    var parentWidth = $("#pothole").width();
+                    console.log('pw: ' + parentWidth);
+
+                    var ide = document.getElementById('potholeIde');
+                    var editorDiv = document.getElementById('potholeEditorDiv');
+                    var canvas = document.getElementById('potholeCanvasDiv');
+
+                    var ideHeight = parentHeight
+                    var centerHeight = ideHeight;
+
+                    var availibleWidth = parentWidth;
+                    var elementSpacing = 12;
+
+                    var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                    canvas.style.width = canvasWidth + 'px';
+                    canvas.style.height = canvasWidth + 'px';
+                    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                    editorDiv.style.left = 0 + 'px'
+                    editorDiv.style.width = editorWidth + 'px';
+                    editorDiv.style.height = parentHeight + 'px';
+                    console.log('editor width: ' + editorWidth)
+
+                    if (karelEditor) {
+                      karelEditor.renderer.onResize();
+                    }
+                  }
+                  main()
+
+                }
+                examplepothole();
+              </script>
+            </div>
+            <hr />
+            <center>
+              <a class="btn btn-primary btn-lg" href="chapter5.html" role="button">บทถัดไป</a>
+            </center>
+            </p>
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>

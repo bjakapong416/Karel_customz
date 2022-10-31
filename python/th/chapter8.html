@@ -1,0 +1,600 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+    <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+  </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+    <img style ="width:75px;" src="../../images/stanford.png"/>
+    </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1;max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 8: Stepwise Refinement</h1>
+            <hr />
+
+            <p>
+              การเขียนโปรแกรมเป็นกระบวนการแก้ปัญหาทางวิทยาศาสตร์ด้วยการใช้คอมพิวเตอร์ ปัญหาหลายๆ
+              ปัญหามีความยุ่งยากในการแก้ไข
+              การพัฒนาโปรแกรมเพื่อแก้ไขปัญหาก็จะมีความยุ่งยาก แปรผันตามความความซับซ้อนของปัญหาที่ต้องการแก้ไข
+              เพื่อที่จะทำให้การแก้ปัญหามีความง่ายมากขึ้น ผู้พัฒนาโปรแกรมต้องปรับกระบวนการ
+              และวางแผนวิธีการแก้ปัญหาอย่างมีระเบียบ
+              เพื่อควบคุมให้ความซับซ้อนของปัญหาอยู่ในระดับที่สามารถจัดการได้
+            </p>
+
+            <p>
+              ในช่วงยุคแรกๆ ของการพัฒนาการเขียนโปรแกรม แนวคิดของการคำนวณในทางวิทยาศาสตร์เป็นเพียงการทดลองทางความคิด
+              ไม่ค่อยมีคนรู้จักการเขียนโปรแกรมในช่วงเวลานั้น ภายหลังได้มีการพัฒนาวิธีการพัฒนาการเขียนโปรแกรม เรียกว่า
+              วิศวกรรมซอฟต์แวร์ วิธีการหนึ่งที่วิศวกรซอฟต์แวร์ชอบใช้ในการแก้ปัญหา คือการใช้กลยุทธ Top-Down Design หรือ
+              Stepwise
+              Refinement ซึ่งทำหน้าที่แก้ปัญหาโดยการมองปัญหาทั้งระบบ แล้วแบ่งปัญหาทั้งระบบออกเป็นส่วนๆ แล้วค่อยๆ
+              แก้ปัญหาที่แบ่งออกมาแล้วทีละส่วน แล้วทดสอบว่าปัญหาที่แก้แล้ว แก้ได้จริงๆ ทดสอบซ้ำๆ
+              จนมั่นใจว่าปัญหาได้ถูกแก้ไขเรียบร้อยแล้ว จึงค่อยขยับไปแก้ปัญหาอื่นๆ ต่อไป
+            </p>
+
+            <p>
+              เพื่อจัดการกับปัญหานี้โปรแกรมเมอร์เริ่มพัฒนาชุดวิธีการเขียนโปรแกรมที่เรียกรวมกันว่า software engineering
+              การใช้ทักษะด้านวิศวกรรมซอฟต์แวร์ที่ดีนั้นไม่เพียงทำให้โปรแกรมเมอร์รายอื่นสามารถอ่านและเข้าใจโปรแกรมของเราได้ง่ายขึ้น
+              แต่ยังช่วยให้เราสามารถเขียนโปรแกรมเหล่านั้นได้ง่ายขึ้นตั้งแต่แรก
+              หนึ่งในความก้าวหน้าด้านระเบียบวิธีที่สำคัญที่สุดที่จะเกิดขึ้นจากวิศวกรรมซอฟต์แวร์คือกลยุทธ์ของการออกแบบจากบนลงล่างหรือการปรับแต่งแบบขั้นตอน
+              (top-down design or stepwise refinement) ซึ่งประกอบด้วยการแก้ปัญหาโดยเริ่มจากปัญหาโดยรวม
+              เราจะแบ่งปัญหาทั้งหมดออกเป็นชิ้น ๆ แล้วแก้ไขแต่ละชิ้นและแบ่งชิ้นส่วนเหล่านั้นออกไปอีกถ้าจำเป็น
+            </p>
+
+            <h3>An exercise in stepwise refinement</h3>
+
+            <p>
+              เพื่อแสดงให้เห็นถึงตัวอย่างการแก้ปัญหาที่มีการแบ่งปัญหาใหญ่ๆ ออกเป็นปัญหาย่อยๆ แล้วทยอยแก้ปัญหา
+              ให้ลองดูโลกของคาเรลที่อยู่ด้านล่าง
+            </p>
+
+
+            <div class="section" id="world1">
+              <div id='world1Ide' class="ide getStarted">
+                <div id='world1CanvasDiv' class='commandCanvasDiv'>
+                  <div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='world1Canvas' style="width:400px;"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+
+
+
+                function exampleworld1() {
+                  var karelIde = null;
+                  var buttonState = 'play';
+                  var canvas = null;
+
+                  function main() {
+                    canvas = document.getElementById('world1Canvas');
+                    karelIde = KarelIde('python', null, canvas, 'beeperTowers', 0, 'en', 1000, 0.8 * 1000);
+                  }
+
+
+                  main()
+
+                }
+                exampleworld1();
+              </script>
+            </div>
+            <p>
+              ในแต่ละคอลัมน์จะมีหอคอยของเหรียญวางซ้อนกันอยู่ โดยที่ไม่รู้ว่าแต่ละหอมีเหรียญวางซ้อนกันกี่เหรียญ
+              และบางหอคอยก็ไม่มีเหรียญอยู่เลย หน้าที่ของคาเรลในรอบนี้คือให้ทำการปีนหอคอยแล้วเก็บเหรียญมาทั้งหมด
+              แล้วนำไปวางที่มุมขวาสุดของชั้นล่าง หลังจากที่คาเรลทำงานเสร็จแล้ว เหรียญทั้งหมดทั้ง 25
+              เหรียญจะต้องถูกนำไปวางที่มุมขวาล่าง และคาเรลก็กลับไปยืนรอที่จุดเริ่มต้นเหมือนเดิม ตามรูปข้างล่าง
+            </p>
+
+
+            <div class="section" id="world2">
+              <div id='world2Ide' class="ide getStarted">
+                <div id='world2CanvasDiv' class='commandCanvasDiv'>
+                  <div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='world2Canvas' style="width:400px;"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+
+
+
+                function exampleworld2() {
+                  var karelIde = null;
+                  var buttonState = 'play';
+                  var canvas = null;
+
+                  function main() {
+                    canvas = document.getElementById('world2Canvas');
+                    karelIde = KarelIde('python', null, canvas, 'beeperTowersGoal', 0, 'en', 1000, 0.8 * 1000);
+                  }
+
+
+                  main()
+
+                }
+                exampleworld2();
+              </script>
+            </div>
+            <p>
+              ในการเริ่มต้นเราอาจสมมติว่ามีจำนวน beeper เป็น 0 ในถุง เมื่อวาง beeper ลงไปเราจะสามารถใช้ function ที่ชื่อ
+              beepers_in_bag() ตรวจสอบได้ นอกจากนี้เรายังสามารถสรุปได้ว่าความสูงของแต่ละ column
+              ไปไม่ถึงจุดเหนือสุดของแผนที่ได้อีกด้วย
+            </p>
+
+            <p>
+              กุญแจสำคัญในการแก้ปัญหานี้คือการย่อยสลายโปรแกรมอย่างถูกวิธีในขณะที่ยังคงสามารถทดสอบตามที่คุณไป
+              งานนี้มีความซับซ้อนมากกว่างานอื่น ๆ
+              ที่คุณเห็นซึ่งทำให้การเลือกโปรแกรมย่อยที่เหมาะสมมีความสำคัญต่อการได้รับโซลูชั่นที่ประสบความสำเร็จ
+            </p>
+
+            <h3>The principle of top-down design</h3>
+
+            <p>
+              หลักการที่ใช้ในการออกแบบโปรแกรม แต่ละคนก็จะมีวิธีการแก้ปัญหาแตกต่างกันไป
+              จากตัวอย่างโจทย์ข้างบน คนทำตัวอย่างได้แบ่งวิธีการแก้ปัญหาออกเป็น 3 ขั้นตอน ขั้นตอนแรก
+              คาเรลจะทำการเก็บเหรียญทั้งหมด
+              ขั้นตอนที่สอง คาเรลจะเดินไปจุดสุดท้ายแล้ววางเหรียญทั้งหมด
+              และขึ้นตอนสุดท้ายคือให้คาเรลเดินกลับไปยังจุดเริ่มต้น
+              ทำให้ได้ฟังก์ชัน main ที่มีลักษณะดังนี้
+
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> main():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_all_beepers()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;drop_all_beepers()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return_home()</code><br />
+            </p>
+
+            <p>
+              ในระดับนี้ ผู้เขียนโปรแกรมสามารถทำความเข้าใจปัญหาได้ง่าย
+              แต่ก็ยังมีรายละเอียดปัญหายิบย่อยอีกเล็กน้อยของฟังก์ชันที่ยังไม่ได้ถูกระบุ ถึงแม้จะเป็นอย่างนั้น
+              ถ้าผู้พัฒนาเชื่อว่า
+              การแบ่งปัญหาออกเป็นขั้นตอนแบบนี้ จะสามารถแก้ปัญหาได้ ก็จะต้องพยายามลงมือสร้างวิธีแก้ปัญหาย่อยๆ ไปเรื่อยๆ
+              เพื่อให้ขั้นตอนที่แบ่งไว้ ใช้ได้จริง แล้วปัญหาทั้งหมดก็จะถูกได้รับการแก้ไข
+            </p>
+
+            <h3>Iterative testing as you go</h3>
+
+            <p>
+              ตอนนี้ได้ออกแบบขั้นตอนหลักของวิธีการแก้ปัญหาของคาเรลทั้งหมดแล้ว
+              ต่อมาก็จะเป็นส่วนของวิธีการแก้ปัญหาของขั้นแรก
+              นั่นคือการเก็บเหรียญทั้งหมด ซึ่งจะทำการประกาศฟังก์ชันเป็น collect_all_beepers() ทีนี้
+              ปัญหาของการเก็บเหรียญทั้งหมด
+              สามารถแบ่งปัญหาออกเป็นปัญหาย่อยๆ ได้อีก 2 ขั้นตอน คือ เก็บเหรียญทีละ 1 แถว แล้วค่อยเดินต่อไปยังแถวถัดไป
+              ทำให้สามารถประกาศฟังก์ชัน collect_all_beepers() ออกมามีหน้าตาประมาณนี้
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> collect_all_beepers() : </code><br />
+              <code
+                class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# temporary implementation for testing purposes</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_one_tower()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move()</code><br />
+            </p>
+
+            <p>
+              ข้อควรระวัง การลองเขียนโปรแกรมทั้งหมดในคราวเดียวโดยไม่ได้ทดสอบคำสั่งทีละส่วน เป็นสิ่งที่อันตราย
+              ถ้าตรวจพบความผิดพลาดขึ้นมา จะทำให้หาแหล่งที่มาของข้อผิดพลาดได้ยาก จากตัวอย่างนี้
+              แนะนำว่าให้ทำการทดสอบฟังก์ชัน
+              collect_one_tower() เก็บเหรียญทีละ 1 แถว ให้เรียบร้อยก่อน แล้วค่อยทดสอบฟังก์ชัน collect_all_tower() ต่อไป
+            </p>
+
+            <p>
+              ตามหลักการชี้แนะนำถ้าเรามีลูปที่ซับซ้อนให้ทดสอบเนื้อความของลูปก่อนที่คุณจะเขียนลูปทั้งหมด
+            </p>
+
+            <h3>Refining collect tower</h3>
+
+            <p>
+              เมื่อฟังก์ชัน collect_one_tower() ถูกเรียกใช้งาน คาเรลจะต้องยีนอยู่ที่ฐานของหอคอย
+              ตรวจสอบว่ามีเหรียญอยู่ไหม
+              ถ้ามีเหรียญก็ไปเก็บมาให้หมด ถ้าไม่มีก็ไม่ต้องทำอะไร เหตุการณ์นี้เหมาะกับการใช้คำสั่ง if ในการควบคุม
+              คำสั่งที่ควรจะป้อนให้คาเรลจะมีหน้าตาประมาณนี้
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> beepers_present():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_actual_tower()</code><br />
+            </p>
+
+            <p>
+              ก่อนที่เราจะเพิ่มคำสั่งลงในโปรแกรม เราตวรคิดว่า จากโจทย์ข้างบนเราจะต้องคิดว่าจะเกิดอะไรขึ้นเมื่อทุกหอคอยมี
+              beeper แต่บางหอคอยก็อาจจะไม่มี beeper เลย เมื่อให้ง่ายขึ้นในการออกแบบโปรแกรม
+            </p>
+
+            <p>
+              ทีนี้ ลองวิเคราะห์โดยละเอียดว่าฟังก์ชัน collect_one_tower() ควรจะสั่งให้คาเรลทำอะไรบ้าง
+            </p>
+
+            <ol>
+              <li>เลี้ยวซ้าย
+              <li>เก็บเหรียญทั้งแถว
+              <li>หันหลังกลับ
+              <li>เดินกลับมาจนถึงกำแพง
+              <li>เลี้ยวซ้าย
+            </ol>
+
+            <p>
+              ซึ่งทำให้สามารถเขียนแบบจำลองของฟังก์ชัน <code> collect_one_tower() </code> ได้ดังนี้
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def </span>collect_one_tower():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turn_left()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_line_of_beepers()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turn_around()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move_to_wall()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turn_left()</code><br />
+            </p>
+
+            <h3>Function preconditions and postconditions</h3>
+
+            <p>
+              คำสั่ง <code> turn_left() </code> ที่จุดเริ่มต้นและจุดสิ้นสุดของฟังก์ชัน
+              <code> collect_one_tower() </code> มีความสำคัญต่อความถูกต้องของโปรแกรมนี้
+              เมื่อ <code> collect_one_tower() </code> ถูกเรียก คาเรลโรบอทจะอยู่แถวที่ 1 หันหน้าไปทางทิศตะวันออกเสมอ
+              เมื่อการดำเนินการเสร็จสิ้นโปรแกรมโดยรวมจะทำงานอย่างถูกต้อง
+              ก็ต่อเมื่อคาเรลหันหน้าไปทางทิศตะวันออกที่มุมเดียวกันอีกครั้ง
+              เงื่อนไขที่ต้องเป็นจริงก่อนที่จะเรียกใช้ฟังก์ชันเรียกว่า <b> preconditions </b>
+              และเงื่อนไขที่ต้องใช้หลังจากฟังก์ชันเสร็จสิ้นเรียกว่า <b>postconditions.</b>
+
+            </p>
+
+            <p>
+
+              ในขณะที่เขียนฟังก์ชั่น ผู้ที่เขียนโปรแกรมจะได้พบปัญหาน้อยกว่ามาก ถ้าได้จดบันทึกสิ่งที่มีใน
+              <b>pre-postconditions </b>
+              และได้จัดการให้ผลลัพธ์ออกมาตรงตามเงื่อนไขเหล่านี้ หลังจากนั้นต้องตรวจสอบให้แน่ใจว่าโปรแกรมที่เขียนขึ้นมา
+              สามารถทำงานได้ตรงตามเงื่อนไขที่ได้ออกแบบไว้อยู่เสมอ โดยสมมติว่าเงื่อนไขเบื้องต้นนั้นถูกต้องในการเริ่มต้น
+              ยกตัวอย่างเช่น
+              คาเรลจะทำอะไรถ้าเรียกใช้ function <code> collect_one_tower() </code> เมื่อคาเรลโรบอทอยู่แถวที่ 1
+              หันหน้าไปทางทิศตะวันออก คำสั่ง
+              <code> turn_left() </code>
+              จะทำให้คาเรลหันหน้าไปทางทิศเหนือซึ่งหมายความว่าคาเรลได้รับการจัดตำแหน่งอย่างเหมาะสมกับคอลัมน์ของเหรียญในหอคอยแล้ว
+              ต่อมาในส่วนของ function <code>collect_line_of_beepers() </code> ซึ่งยังไม่ได้ถูกเขียนขึ้นมา
+              แต่จะอธิบายให้เข้าใจหลักการทำงานของ
+              function นี้ก่อน คือ เพียงแค่เก็บเหรียญ และเดินต่อไปโดยไม่ต้องเลี้ยว เมื่อสิ้นสุดการเรียกใช้ function
+              collect_line_of_beepers() คาเรลจะยังคงหันไปทางทิศเหนือ ต่อมา function <code> turn_around() </code>
+              จะทำให้คาเรลหันหน้าไปทางทิศใต้
+              เพื่อเดินกลับมายังจุดล่างสุดและทำตามเงื่อนไขต่อไป หลังจากั้นก็เดินให้เจอกำแพง แล้วเลี้ยวซ้าย
+
+
+            </p>
+
+            <h3>Repeating the process</h3>
+
+            <p>ในตอนนี้เมื่อเรารันโปรแกรมเราเสร็จสิ้น เราก็จะสามารถแก้ไขปัญหาการทำซ้ำใน 1 หอคอยได้แล้ว!! โดยใช้หลักการ
+              <code><span class="demoText">while</span></code> loop
+
+              ถึงจุดนี้ก็น่าจะแก้ปัญหาเก็บเหรียญ 1 แถวได้สำเร็จแล้ว
+              ขั้นตอนต่อมาคือการจัดให้หุ่นยนต์คาเรลทำการเก็บเหรียญซ้ำๆ
+              กับหอคอยอื่นๆ ที่เหลือ สามารถใช้เทคนิค <code><span class="demoText">while loop </span></code>
+              ในการแก้ปัญหานี้ได้ ปัญหาต่อมาคือ หน้าตาของ while loop
+              ควรจะออกมาในลักษณะใด
+
+            </p>
+
+            <p>
+              ลองวิเคราะห์จากเงื่อนไขที่มี ซึ่งต้องการให้คาเรลหยุดเดินไปข้างหน้าเพื่อเก็บเหรียญทีละแถว เมื่อเจอกำแพง
+              ดังนั้นจึงสามารถใช้คำสั่ง front_is_clear() ในการตรวจสอบได้
+              คาเรลจะเดินไปเก็บเหรียญทุกครั้งที่มีการเดินจากซ้ายไปขวาบนแถวที่ 1 ผู้เขียนสามารถยัดคำสั่ง
+              collect_one_tower() ไว้ใน code
+              block ของ while loop แล้วประกาศคำสั่งพวกนี้ไว้ในฟังก์ชัน collect_all_beepers()
+            </p>
+
+            <p>
+              อย่างไรก็ตาม ผู้เขียนโปรแกรมควรระวังในส่วนของการออกแบบการเขียนลูปให้ฟังก์ชัน collect_all_beepers()
+              ที่อาจจะแฝงความผิดพลาดไว้ ดังตัวอย่างด้านล่างนี้
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def </span>collect_all_beepers():</code><br />
+              <code class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# buggy loop! </code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> front_is_clear(): </code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_one_tower()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move()</code><br />
+            </p>
+
+            <p>
+              การเขียนฟังก์ชัน collect_all_beepers()
+              ในรูปแบบข้างบนอาจจะทำให้เกิดความผิดพลาดในแบบเดียวกับที่ได้กล่าวไปแล้วในบทที่ 6
+              ที่อาจจะทำให้คาเรลไม่ได้ตรวจเช็คว่ามีเหรียญที่คอลัมน์สุดท้ายหรือไม่
+              ดังนั้นการออกแบบฟังก์ชันที่ถูกต้องก็ควรจะให้เช็คเหรียญอีกรอบหลังจากที่ทำงานใน while loop แล้ว
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def </span>collect_all_beepers():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> front_is_clear():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_one_tower()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;collect_one_tower()</code><br />
+            </p>
+
+            <p>
+              หากยังจำได้ จะสังเกตได้ว่าฟังก์ชันนี้มีลักษณะโครงสร้างเหมือนฟังก์ชัน put_beeper() ในโปรแกรม
+              PlaceBeeperLine
+              ที่ได้อธิบายไว้ในบทที่ 6 แค่แตกต่างกันก็ตรงชื่อของฟังก์ชันที่ในโปรแกรมนี้เรียกว่า collect_one_tower()
+              ซึ่งแก้ปัญหาข้อผิดพลาดในรูปแบบเดียวกัน
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def </span>collect_all_beepers():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span> front_is_clear():</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><i class="demoText">perform some
+                operation.</i><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move()</code><br />
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><i class="demoText">perform the same operation for the
+                final corner.</i><br />
+            </p>
+
+            <p>
+              จากตัวอย่างข้างบน ผู้เขียนโปรแกรมสามารถนำแนวคิดในการออกแบบโปรแกรมไปประยุกต์ใช้กับปัญหาอื่นๆ ได้
+              ไม่ว่าจะเป็นปัญหาที่ง่ายหรือยาก
+              ผู้เขียนโปรแกรมก็สามารถแก้ปัญหาเหล่านั้นได้ด้วยการแบ่งการแก้ปัญหาออกเป็นขั้นตอน
+              และใช้แนวคิดที่ได้มาจากแต่ละบทที่ผ่านมา
+            </p>
+
+            <h3>Finishing up</h3>
+
+            <p>
+              ในขั้นสุดท้ายของการเขียนโปรแกรมที่สมบูรณ์ ให้ลองดูตัวอย่างโปรแกรมด้านล่าง
+              จะสังเกตุเห็นได้ว่ามีบางฟังก์ชันเพิ่มขึ้นมา
+              เช่น move_to_wall() เพื่อให้คาเรลเดินไปยังกำแพงได้ และ return_home()
+              ที่ให้คาเรลสามารถเดินกลับไปยังจุดเริ่มต้น
+              ก็จะถือว่าสามารถแก้ไขปัญหานี้ได้เรียบร้อย
+            </p>
+
+
+
+            <div class="section embeddedIde" id="beeperTowers">
+              <div id='beeperTowersIde' class="ide getStarted" style="height:1123.2px">
+                <div id='beeperTowersIdeCenter' class="ideCenter" style="height:inherit;">
+                  <div id='beeperTowersEditorDiv' style="width:600px;height:inherit;"></div>
+
+                </div>
+              </div>
+              <div id='beeperTowersCanvasDiv' style="width:500px;height:360px">
+                <canvas id='beeperTowersCanvas' class='ideCanvas'></canvas>
+              </div>
+              <div style="width:100%;">
+                <div class="buttonBar">
+                  <button class="btn btn-default" id="beeperTowersRunButton"><span
+                      class="glyphicon glyphicon-play"></span> Run Program</button>
+                </div>
+              </div>
+              <script>
+
+
+
+                function examplebeeperTowers() {
+                  STARTER_CODE = `
+# File: BeeperCollectingKarel.py
+# --------------------------------
+# The BeeperCollectingKarel class collects all the beepers
+# in a series of vertical towers and deposits them at the
+# eastmost corner on 1st row.
+from karel.stanfordkarel import *
+
+def main():
+   collect_all_beepers()
+   drop_all_beepers()
+   return_home()
+
+# Collects the beepers from every tower by moving along 1st
+# row, calling collect_one_tower at every corner.  The
+# postcondition for this function is that Karel is in the
+# easternmost corner of 1st row facing east.
+def collect_all_beepers():
+   while front_is_clear():
+      collect_one_tower()
+      move()
+   collect_one_tower()
+
+# Collects the beepers in a single tower. When collect_one_tower
+# is called, Karel must be on 1st row facing east.  The
+# postcondition for collect_one_tower is that Karel must again
+# be facing east on that same corner.
+def collect_one_tower():
+   turn_left()
+   collect_line_of_beepers()
+   turn_around()
+   move_to_wall()
+   turn_left()
+
+# Collects a consecutive line of beepers. The end of the beeper
+# line is indicated by a corner that contains no beepers.
+def collect_line_of_beepers():
+   while beepers_present():
+      pick_beeper()
+      if front_is_clear():
+         move()
+
+# Drops all the beepers on the current corner.
+def drop_all_beepers() :
+   while beepers_in_bag():
+      put_beeper()
+
+# Returns Karel to its initial position at the corner of 1st
+# Avenue and 1st row, facing east.  The precondition for this
+# function is that Karel must be facing east somewhere on 1st
+# row, which is true at the conclusion of collect_all_beepers.
+def return_home():
+   turn_around()
+   move_to_wall()
+   turn_around()
+
+# Moves Karel forward until it is blocked by a wall.
+def move_to_wall():
+   while front_is_clear():
+      move()
+
+# Turns Karel 180 degrees around
+def turn_around():
+   turn_left()
+   turn_left()`
+                  // because of that extra endline at the start of the string
+                  STARTER_CODE = STARTER_CODE.trim();
+
+                  var karelIde = null;
+                  var karelEditor = null;
+                  var buttonState = 'play';
+
+                  function main() {
+                    karelEditor = importPythonEditor('beeperTowersEditor', 'beeperTowersEditorDiv', STARTER_CODE, false);
+                    //importRunButtonBar('example1ButtonBar');
+
+                    $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                    initTabs();
+                    var canvas = document.getElementById('beeperTowersCanvas');
+                    karelIde = KarelIde('python', karelEditor, canvas, 'beeperTowers', 0.9, 'en', 1000,
+                      0.8 * 1000);
+                    $('#beeperTowersRunButton').click(function () { playClicked() });
+                    onresize();
+                  }
+
+                  function playClicked() {
+                    if (buttonState == 'play') {
+                      karelIde.playButton();
+
+                      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                      $('#beeperTowersRunButton').html(resetText);
+                      buttonState = 'reset';
+                    } else if (buttonState == 'reset') {
+                      karelIde.stopButton();
+                      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                      $('#beeperTowersRunButton').html(playText);
+                      buttonState = 'play';
+                    }
+
+                  }
+
+                  function onresize() {
+
+                    // var parentHeight = 1123.2;
+                    // var canvasWidth = 300
+                    // var parentWidth = $("#beeperTowers").width();
+                    // console.log('pw: ' + parentWidth);
+
+                    // var editorDiv = document.getElementById('beeperTowersCanvasDiv');
+                    // var canvas = document.getElementById('beeperTowersCanvas');
+
+
+
+                    // var availibleWidth = parentWidth;
+                    // var elementSpacing = 12;
+
+                    // var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                    // canvas.style.width = canvasWidth + 'px';
+                    // canvas.style.height = canvasWidth + 'px';
+                    // canvas.style.left = (editorWidth + elementSpacing) + 'px';
+                  }
+
+
+                  main()
+
+                }
+                examplebeeperTowers();
+              </script>
+            </div>
+            <hr />
+            <center>
+              <a class="btn btn-primary btn-lg" href="chapter9.html" role="button">บทถัดไป</a>
+            </center>
+            </p>
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>

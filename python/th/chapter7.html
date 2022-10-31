@@ -1,0 +1,375 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+      <img style ="width:75px;" src="../../images/stanford.png"/>
+      </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1;max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 7: If Statements</h1>
+            <hr />
+
+            <p>
+              ในบทนี้จะเป็นการเรียนรู้สำหรับการเขียนโปรแกรมเชิงเงื่อนไขด้วยการใช้คำสั่ง (<code>if</code> และ
+              <code>if/else</code>)
+            </p>
+
+            <h3>Basic Conditionals</h3>
+
+            <p>
+              โปรแกรมจะเริ่มทำงานตามคำสั่งที่อยู่ใน code block ของคำสั่ง if ก็ต่อเมื่อเงื่อนไขที่ทำการตรวจสอบ
+              มีค่าเป็นจริง
+              และจะทำงานตามคำสั่งที่อยู่ใน code block ของคำสั่ง else เมื่อเงื่อนไขที่ทำการตรวจสอบ มีค่าเป็นเท็จ
+            </p>
+
+            <p class="demoCode">
+              <code><span class="keyword">if</span> </code><i class="demoText">test</i><code>:</code><br />
+              <i class="demoText" style="margin-left:2em">if code-block</i><br />
+              <span class="keyword">else</span>:</code><br />
+              <i class="demoText" style="margin-left:2em">else code-block</i><br />
+            </p>
+            <p>
+              เพื่อให้สามารถทำความเข้าใจการทำงานของคำสั่ง if/else ได้ง่ายขึ้น
+              ด้านล่างคือตัวอย่างโปรแกรมที่ให้คาเรลเดินไปจนสุดกำแพง
+              โดยในระหว่างทาง ถ้าเจอเหรียญ ให้คาเรลเก็บเหรียญ แต่ถ้าไม่เจอเหรียญ ก็ให้คาเรลวางเหรียญแทน
+            </p>
+
+
+            <div class="section embeddedIde" id="invertLine">
+              <div id='invertLineIde' class="ide getStarted" style="height:316.8px">
+                <div id='invertLineIdeCenter' class="ideCenter">
+                  <div id='invertLineEditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                  <div id='invertLineCanvasDiv' class='ideCanvasDiv'>
+                    <div class="worldDropdown">
+
+                      <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          Change World
+                          <span class="caret"></span>
+                        </button>
+                        <ul id="invertLineWorlds" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a>1x1</a></li>
+                          <li><a>4x4</a></li>
+                          <li><a>3x6</a></li>
+                          <li><a>7x7</a></li>
+                          <li><a>8x8</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <canvas id='invertLineCanvas' class='ideCanvas'></canvas>
+                  </div>
+                </div>
+              </div>
+              <div style="width:100%;">
+                <div class="buttonBar">
+                  <button class="btn btn-default" id="invertLineRunButton"><span
+                      class="glyphicon glyphicon-play"></span> Run Program</button>
+                </div>
+              </div>
+              <script>
+
+
+
+                function exampleinvertLine() {
+                  STARTER_CODE = `
+  from karel.stanfordkarel import *
+  
+  # the start of the program
+  def main():
+     while front_is_clear():
+        invert_beeper()
+        move()
+     # to prevent a fencepost bug
+     invert_beeper()
+  
+  # picks up a beeper if one is present
+  # puts down a beeper otherwise
+  def invert_beeper():
+     # an if/else statement
+     if beepers_present():
+        pick_beeper()
+     else:
+        put_beeper()`
+                  // because of that extra endline at the start of the string
+                  STARTER_CODE = STARTER_CODE.trim();
+
+                  var karelIde = null;
+                  var karelEditor = null;
+                  var buttonState = 'play';
+
+                  function main() {
+                    karelEditor = importPythonEditor('invertLineEditor', 'invertLineEditorDiv', STARTER_CODE, true);
+                    setupWorldDropdown();
+
+
+                    var canvas = document.getElementById('invertLineCanvas');
+                    karelIde = KarelIde('python', karelEditor, canvas, 'invert', 0.9, 'en');
+                    $('#invertLineRunButton').click(function () { playClicked() });
+                    onresize();
+
+                  }
+
+                  function setupWorldDropdown() {
+                    console.log('setup world dropdown')
+                    let ul = document.getElementById('invertLineWorlds')
+
+                    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+                    // Iterate LIs
+                    for (var itemi = 0; itemi < ul.childNodes.length; itemi++) {
+                      var li = ul.childNodes[itemi];
+                      if (li.nodeName == "LI") {
+                        var a = li.childNodes[0]
+                        let worldName = a.innerHTML;
+                        console.log(worldName)
+                        a.onclick = () => setWorld(worldName);
+
+                      }
+                    }
+                  }
+
+                  function setWorld(worldName) {
+                    console.log('here we go', worldName)
+                    karelIde.changeWorld(worldName)
+                    changeToPlayButton()
+                  }
+
+                  function playClicked() {
+                    if (buttonState == 'play') {
+                      karelIde.playButton();
+                      changeToResetButton();
+                    } else if (buttonState == 'reset') {
+                      karelIde.stopButton();
+                      changeToPlayButton();
+                    }
+                  }
+
+                  function changeToPlayButton() {
+                    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                    $('#invertLineRunButton').html(playText);
+                    buttonState = 'play';
+                  }
+
+                  function changeToResetButton() {
+                    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                    $('#invertLineRunButton').html(resetText);
+                    buttonState = 'reset';
+                  }
+
+                  function onresize() {
+                    var parentHeight = 316.8;
+                    var canvasWidth = 300
+                    var parentWidth = $("#invertLine").width();
+                    console.log('pw: ' + parentWidth);
+
+                    var ide = document.getElementById('invertLineIde');
+                    var editorDiv = document.getElementById('invertLineEditorDiv');
+                    var canvas = document.getElementById('invertLineCanvasDiv');
+
+                    var ideHeight = parentHeight
+                    var centerHeight = ideHeight;
+
+                    var availibleWidth = parentWidth;
+                    var elementSpacing = 12;
+
+                    var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                    canvas.style.width = canvasWidth + 'px';
+                    canvas.style.height = canvasWidth + 'px';
+                    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                    editorDiv.style.left = 0 + 'px'
+                    editorDiv.style.width = editorWidth + 'px';
+                    editorDiv.style.height = parentHeight + 'px';
+                    console.log('editor width: ' + editorWidth)
+
+                    if (karelEditor) {
+                      karelEditor.renderer.onResize();
+                    }
+                  }
+                  main()
+
+                }
+                exampleinvertLine();
+              </script>
+            </div>
+
+
+            <p> ในบางครั้งที่ต้องการให้โปรแกรมทำงานเฉพาะอย่างเพิ่มเติม เมื่อพบเงื่อนไขพิเศษ สามารถใช้คำสั่ง if
+              เพียงอย่างเดียวได้โดยไม่จำเป็นต้องใช้คำสั่ง else
+            </p>
+            <p class="demoCode">
+              <code><span class="keyword">if</span> </code><i class="demoText">test</i><code>: </code><br />
+              <i class="demoText" style="margin-left:2em">if code-block</i><br />
+            </p>
+
+            <h3>Conditions</h3>
+
+            <p>
+              ตารางข้างล่างคือรายการคำสั่งที่หุ่นยนต์คาเรลสามารถใช้ตรวจสอบเงื่อนไขต่างๆ ได้
+            </p>
+
+            <p>
+              <table class="table table-condensed">
+                <tr>
+                  <th>Test</th>
+                  <th>Opposite</th>
+                  <th>ตรวจสอบสิ่งใด</th>
+                </tr>
+                <tr>
+                  <td><code>front_is_clear()</code></td>
+                  <td><code>front_is_blocked()</code></td>
+                  <td>มีกําแพงด้านหน้าหรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>beepers_present()</code></td>
+                  <td><code>no_beepers_present()</code></td>
+                  <td>มีเหรียญที่ว่างอยู่ตรงใต้ Karel หรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>left_is_clear()</code></td>
+                  <td><code>left_is_blocked()</code></td>
+                  <td>มีกําแพงด้านซ้ายหรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>right_is_clear()</code></td>
+                  <td><code>right_is_blocked()</code></td>
+                  <td>มีกําแพงด้านขวาหรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>beepers_in_bag()</code></td>
+                  <td><code>no_beepers_in_bag()</code></td>
+                  <td>มีเหรียญในถุงที่หุ่น Karel หรือไม่</td>
+                </tr>
+                <!-- dirs -->
+                <tr>
+                  <td><code>facing_north()</code></td>
+                  <td><code>not_facing_north()</code></td>
+                  <td>ทิศทาง Karel ว่าหันไปทางเหนือหรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>facing_south()</code></td>
+                  <td><code>not_facing_south()</code></td>
+                  <td>ทิศทาง Karel ว่าหันไปทางใต้หรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>facing_east()</code></td>
+                  <td><code>not_facing_east()</code></td>
+                  <td>ทิศทาง Karel ว่าหันไปทางตะวันออกหรือไม่</td>
+                </tr>
+                <tr>
+                  <td><code>facing_west()</code></td>
+                  <td><code>not_facing_west()</code></td>
+                  <td>ทิศทาง Karel ว่าหันไปทางตะวันตกหรือไม่</td>
+                </tr>
+              </table>
+            </p>
+
+            <h3>Putting it all together</h3>
+            <p>
+              ยินดีด้วย ถึงตรงนี้ ผู้ใช้ได้เรียนรู้พื้นฐานของการเขียนโปรแกรมในทุกๆ
+              ภาษาในขณะที่เรียนรู้การควบคุมหุ่นยนต์คาเรล
+              โดยคำสั่ง for loops, while loops, if/else เป็นพื้นฐานที่ถูกใช้ในทุกๆ ภาษาหรับการเขียนโปรแกรม
+            </p>
+            <hr />
+            <center>
+              <a class="btn btn-primary btn-lg" href="chapter8.html" role="button">บทถัดไป</a>
+            </center>
+            </p>
+
+
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,565 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+    <img style ="width:75px;" src="../../images/stanford.png"/>
+    </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1;max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 5: การวนซ้ำแบบ For Loops</h1>
+            <hr />
+            <p>
+
+              งานอีกประเภทหนึ่งที่คอมพิวเตอร์สามารถทำงานได้ดีเป็นพิเศษ คือ การทำงานเดิมๆ ซ้ำๆ ภาษาที่นักโปรแกรมเมอร์
+              มักจะใช้กล่าวถึงพฤติกรรมของคอมพิวเตอร์กับคำสั่งนี้ มักจะเรียกกันว่า “การ วนลูป”
+              ผู้ใช้สามารถสั่งคาเรลให้ทำงานบางอย่างซ้ำๆ ได้ เช่น สั่งให้คาเรลวางเหรียญ 42 เหรียญ
+            </p>
+
+
+            <div class="section" id="ba">
+              <div id='baIde' class="ide getStarted">
+                <div id='baCanvasDiv' class='commandCanvasDiv'>
+                  <div>
+                    <div class="commandCanvasTitle">Before:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='baCanvasBefore' style="width:200px;"></canvas>
+                    </div>
+                  </div>
+                  <div style="width:50px"></div>
+                  <div>
+                    <div class="commandCanvasTitle">After:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='baCanvasAfter' style="width:200px;"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+
+
+
+                function exampleba() {
+                  var karelIde = null;
+                  var buttonState = 'play';
+                  var canvas = null;
+
+                  function main() {
+                    canvas = document.getElementById('baCanvasBefore');
+                    karelIde = KarelIde('python', null, canvas, '99beepersStart', 0.9, 'en', 1000, 1.0 * 1000);
+
+                    let canvasGoal = document.getElementById('baCanvasAfter');
+                    let goalIde = KarelIde('python', null, canvasGoal, '99beepersGoal', 0.9, 'en', 1000, 1.0 * 1000)
+                  }
+
+
+                  main()
+
+                }
+                exampleba();
+              </script>
+            </div>
+            <h3>พื้นฐานของ For Loop</h3>
+
+            <p>
+              เนื่องจากผู้ใช้รู้อยู่แล้วว่าต้องการให้คาเรลวางเหรียญ 42 เหรียญ ผู้ใช้สามารถใช้คำสั่ง for
+              ในการสั่งให้โปรแกรม
+              ทำงานที่รู้จำนวนครั้งที่แน่นอนได้ โครงสร้างภาษาไพธอนสำหรับคำสั่ง for คือ
+            </p>
+
+            <p class="demoCode">
+              <code>for i in range(</code><i class="demoText">count</i><code>):</code><br />
+              <i style="margin-left:2em">statements to be repeated</i><br />
+            </p>
+
+            <p class="mb-20">
+
+
+              โดยที่ i คือตัวนับ และ ค่า count คือค่าที่ใช้กำหนดจำนวนรอบที่ต้องการให้ทำงานซ้ำ ในกรณีนี้สามารถแทนค่า
+              count ด้วย 42
+              แล้วให้ลำดับคำสั่งที่ต้องการทำซ้ำ อยู่ใน code block ของคำสั่ง for
+              ด้วยการใส่ย่อหน้าเพิ่มที่ลำดับคำสั่งนั้นๆ ทดลองกดปุ่ม
+              “Run Program” เพื่อดูการทำงานของคำสั่ง for
+
+
+            </p>
+
+            <p>
+
+              <div class="section embeddedIde" id="99beepers">
+                <div id='99beepersIde' class="ide getStarted" style="height:213.60000000000002px">
+                  <div id='99beepersIdeCenter' class="ideCenter">
+                    <div id='99beepersEditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                    <div id='99beepersCanvasDiv' class='ideCanvasDiv'>
+                      <canvas id='99beepersCanvas' class='ideCanvas'></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div style="width:100%;">
+                  <div class="buttonBar">
+                    <button class="btn btn-default" id="99beepersRunButton"><span
+                        class="glyphicon glyphicon-play"></span> Run Program</button>
+                  </div>
+                </div>
+                <script>
+
+
+
+                  function example99beepers() {
+                    STARTER_CODE = `
+# File: PlaceManyBeepers.py
+# -----------------------------
+# Places 42 beepers using a for loop
+from karel.stanfordkarel import *
+
+def main():
+   move()
+   # repeat put_beeper many times 
+   for i in range(42):
+  	  put_beeper()
+   move()
+   `
+                    // because of that extra endline at the start of the string
+                    STARTER_CODE = STARTER_CODE.trim();
+
+                    var karelIde = null;
+                    var karelEditor = null;
+                    var buttonState = 'play';
+
+                    function main() {
+                      karelEditor = importPythonEditor('99beepersEditor', '99beepersEditorDiv', STARTER_CODE, true);
+                      //importRunButtonBar('example1ButtonBar');
+
+                      $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                      initTabs();
+                      var canvas = document.getElementById('99beepersCanvas');
+                      karelIde = KarelIde('python', karelEditor, canvas, '99beepersStart', 0.8, 'en');
+                      $('#99beepersRunButton').click(function () { playClicked() });
+                      onresize();
+
+                    }
+
+                    function playClicked() {
+                      if (buttonState == 'play') {
+                        karelIde.playButton();
+
+                        var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                        $('#99beepersRunButton').html(resetText);
+                        buttonState = 'reset';
+                      } else if (buttonState == 'reset') {
+                        karelIde.stopButton();
+                        var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                        $('#99beepersRunButton').html(playText);
+                        buttonState = 'play';
+                      }
+
+                    }
+
+                    function onresize() {
+                      var parentHeight = 213.60000000000002;
+                      var canvasWidth = 200
+                      var parentWidth = $("#99beepers").width();
+                      console.log('pw: ' + parentWidth);
+
+                      var ide = document.getElementById('99beepersIde');
+                      var editorDiv = document.getElementById('99beepersEditorDiv');
+                      var canvas = document.getElementById('99beepersCanvasDiv');
+
+                      var ideHeight = parentHeight
+                      var centerHeight = ideHeight;
+
+                      var availibleWidth = parentWidth;
+                      var elementSpacing = 12;
+
+                      var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                      canvas.style.width = canvasWidth + 'px';
+                      canvas.style.height = canvasWidth + 'px';
+                      canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                      editorDiv.style.left = 0 + 'px'
+                      editorDiv.style.width = editorWidth + 'px';
+                      editorDiv.style.height = parentHeight + 'px';
+                      console.log('editor width: ' + editorWidth)
+
+                      if (karelEditor) {
+                        karelEditor.renderer.onResize();
+                      }
+                    }
+                    main()
+
+                  }
+                  example99beepers();
+                </script>
+              </div>
+              <p>
+
+
+                ลำดับคำสั่งของตัวอย่างโปรแกรม PlaceManyBeepers สามารถแก้ไขได้ ลองแก้ไขให้คาเรลวางเหรียญเพียง 15 เหรียญ
+              </p>
+
+
+              <p>
+
+                ตัวอย่างก่อนหน้านี้้ มีเพียงคำสั่งเดียวที่อยู่่ใน for loop ผู้ใช้สามารถใส่ลำดับคำสั่งมากกว่า 1
+                คำสั่งต่อใน code block
+                ของคำสั่ง for ได้ ลองกดปุ่ม “Run Program” ของตัวอย่างโปรแกรม CornerBeepers ที่อยู่ด้านล่าง
+                แล้วทำความเข้าใจการทำงานของคาเรล โดยหุ่นยนต์คาเรลจะนำเหรียญไปวางที่มุมแต่ละมุมในโลกของคาเรลขนาด 4x4
+              </p>
+
+
+              <div class="section embeddedIde" id="cornerBeepers">
+                <div id='cornerBeepersIde' class="ide getStarted" style="height:213.60000000000002px">
+                  <div id='cornerBeepersIdeCenter' class="ideCenter">
+                    <div id='cornerBeepersEditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                    <div id='cornerBeepersCanvasDiv' class='ideCanvasDiv'>
+                      <canvas id='cornerBeepersCanvas' class='ideCanvas'></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div style="width:100%;">
+                  <div class="buttonBar">
+                    <button class="btn btn-default" id="cornerBeepersRunButton"><span
+                        class="glyphicon glyphicon-play"></span> Run Program</button>
+                  </div>
+                </div>
+                <script>
+
+
+
+                  function examplecornerBeepers() {
+                    STARTER_CODE = `
+# File: CornerBeepers.py
+# -----------------------------
+# Places one beeper in each corner
+from karel.stanfordkarel import *
+def main():
+   # repeat the body 4 times 
+   for i in range(4):
+	   put_beeper()
+	   move()
+	   move()
+	   move()
+	   turn_left()
+`
+                    // because of that extra endline at the start of the string
+                    STARTER_CODE = STARTER_CODE.trim();
+
+                    var karelIde = null;
+                    var karelEditor = null;
+                    var buttonState = 'play';
+
+                    function main() {
+                      karelEditor = importPythonEditor('cornerBeepersEditor', 'cornerBeepersEditorDiv', STARTER_CODE, true);
+                      //importRunButtonBar('example1ButtonBar');
+
+                      $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                      initTabs();
+                      var canvas = document.getElementById('cornerBeepersCanvas');
+                      karelIde = KarelIde('python', karelEditor, canvas, 'cornerBeepersStart', 0.9, 'en');
+                      $('#cornerBeepersRunButton').click(function () { playClicked() });
+                      onresize();
+
+                    }
+
+                    function playClicked() {
+                      if (buttonState == 'play') {
+                        karelIde.playButton();
+
+                        var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                        $('#cornerBeepersRunButton').html(resetText);
+                        buttonState = 'reset';
+                      } else if (buttonState == 'reset') {
+                        karelIde.stopButton();
+                        var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                        $('#cornerBeepersRunButton').html(playText);
+                        buttonState = 'play';
+                      }
+
+                    }
+
+                    function onresize() {
+                      var parentHeight = 213.60000000000002;
+                      var canvasWidth = 200
+                      var parentWidth = $("#cornerBeepers").width();
+                      console.log('pw: ' + parentWidth);
+
+                      var ide = document.getElementById('cornerBeepersIde');
+                      var editorDiv = document.getElementById('cornerBeepersEditorDiv');
+                      var canvas = document.getElementById('cornerBeepersCanvasDiv');
+
+                      var ideHeight = parentHeight
+                      var centerHeight = ideHeight;
+
+                      var availibleWidth = parentWidth;
+                      var elementSpacing = 12;
+
+                      var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                      canvas.style.width = canvasWidth + 'px';
+                      canvas.style.height = canvasWidth + 'px';
+                      canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                      editorDiv.style.left = 0 + 'px'
+                      editorDiv.style.width = editorWidth + 'px';
+                      editorDiv.style.height = parentHeight + 'px';
+                      console.log('editor width: ' + editorWidth)
+
+                      if (karelEditor) {
+                        karelEditor.renderer.onResize();
+                      }
+                    }
+                    main()
+
+                  }
+                  examplecornerBeepers();
+                </script>
+              </div>
+              <p>
+
+                จากโปรแกรมข้างต้น แสดงให้เห็นถึงลำดับการทำงานของชุดคำสั่งที่ทำการวนซ้ำภายในกรอบการทำงานของ for loop
+
+              </p>
+
+              <p>
+
+
+                มีเหตุการณ์อยู่หลายๆ ครั้งที่ผู้ใช้ไม่สามารถสั่งให้โปรแกรมทำงานครบตามจำนวนครั้งที่ต้องการได้
+                เพราะมีความผิดพลาดในการทำงาน เกิดขึ้นในระหว่างที่กำลังทำงานคำสั่ง for
+                เนื่องจากผู้ใช้ไม่ได้ประเมินผลลัพธ์สุดท้ายของการทำงานของโปรแกรมในการวนลูปครั้งแรก
+                ก่อนที่จะให้โปรแกรมทำงานวนลูปซ้ำในรอบถัดไป โปรแกรม CornerBeepers สามารถแก้ไขได้ ให้ทดลองลบคำสั่ง
+                <code>turn_left()</code> ออกไป
+                แล้วกดปุ่ม “Run Program” ให้คาเรลทำงานอีกครั้ง แล้วสังเกตข้อผิดพลาดที่เกิดขึ้น
+              </p>
+
+              <h3>การวนซ้ำที่ซ้อนกัน</h3>
+
+              <p>
+
+                ในทางเทคนิค ไม่ได้มีการห้ามใช้คำสั่ง for ภายในคำสั่ง for ดังนั้น ผู้ใช้สามารถสร้างลูปซ้อนกันได้
+                ลองวิเคราะห์การทำงานของโปรแกรม CornerFiveBeepers เพื่อดูหุ่นยนต์คาเรลทำงานโดยการไปวางเหรียญ 5
+                เหรียญที่แต่ละมุมในโลกของคาเรลขนาด 4x4
+
+                <div class="section embeddedIde" id="cornerBeepers10">
+                  <div id='cornerBeepers10Ide' class="ide getStarted" style="height:373.8px">
+                    <div id='cornerBeepers10IdeCenter' class="ideCenter">
+                      <div id='cornerBeepers10EditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                      <div id='cornerBeepers10CanvasDiv' class='ideCanvasDiv'>
+                        <canvas id='cornerBeepers10Canvas' class='ideCanvas'></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="width:100%;">
+                    <div class="buttonBar">
+                      <button class="btn btn-default" id="cornerBeepers10RunButton"><span
+                          class="glyphicon glyphicon-play"></span> Run Program</button>
+                    </div>
+                  </div>
+                  <script>
+
+
+
+                    function examplecornerBeepers10() {
+                      STARTER_CODE = `
+# File: CornerFiveBeepers.py
+# -----------------------------
+# Places five beepers in each corner
+from karel.stanfordkarel import *
+def main():
+   # Repeat once for each corner 
+   for i in range(4):
+      put_five_beepers()
+      move_to_next_corner()
+
+# reposition karel to the next corner 
+def move_to_next_corner() :
+   move()
+   move()
+   move()
+   turn_left()
+
+# places 5 beepers using a for loop 
+def put_five_beepers() :
+   for i in range(5):
+   	put_beeper()
+`
+                      // because of that extra endline at the start of the string
+                      STARTER_CODE = STARTER_CODE.trim();
+
+                      var karelIde = null;
+                      var karelEditor = null;
+                      var buttonState = 'play';
+
+                      function main() {
+                        karelEditor = importPythonEditor('cornerBeepers10Editor', 'cornerBeepers10EditorDiv', STARTER_CODE, false);
+                        //importRunButtonBar('example1ButtonBar');
+
+                        $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                        initTabs();
+                        var canvas = document.getElementById('cornerBeepers10Canvas');
+                        karelIde = KarelIde('python', karelEditor, canvas, 'cornerBeepersStart', 0.9, 'en');
+                        $('#cornerBeepers10RunButton').click(function () { playClicked() });
+                        onresize();
+
+                      }
+
+                      function playClicked() {
+                        if (buttonState == 'play') {
+                          karelIde.playButton();
+
+                          var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                          $('#cornerBeepers10RunButton').html(resetText);
+                          buttonState = 'reset';
+                        } else if (buttonState == 'reset') {
+                          karelIde.stopButton();
+                          var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                          $('#cornerBeepers10RunButton').html(playText);
+                          buttonState = 'play';
+                        }
+
+                      }
+
+                      function onresize() {
+                        var parentHeight = 373.8;
+                        var canvasWidth = 200
+                        var parentWidth = $("#cornerBeepers10").width();
+                        console.log('pw: ' + parentWidth);
+
+                        var ide = document.getElementById('cornerBeepers10Ide');
+                        var editorDiv = document.getElementById('cornerBeepers10EditorDiv');
+                        var canvas = document.getElementById('cornerBeepers10CanvasDiv');
+
+                        var ideHeight = parentHeight
+                        var centerHeight = ideHeight;
+
+                        var availibleWidth = parentWidth;
+                        var elementSpacing = 12;
+
+                        var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                        canvas.style.width = canvasWidth + 'px';
+                        canvas.style.height = canvasWidth + 'px';
+                        canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                        editorDiv.style.left = 0 + 'px'
+                        editorDiv.style.width = editorWidth + 'px';
+                        editorDiv.style.height = parentHeight + 'px';
+                        console.log('editor width: ' + editorWidth)
+
+                        if (karelEditor) {
+                          karelEditor.renderer.onResize();
+                        }
+                      }
+                      main()
+
+                    }
+                    examplecornerBeepers10();
+                  </script>
+                </div>
+              </p>
+              <hr />
+              <center>
+                <a class="btn btn-primary btn-lg" href="chapter6.html" role="button">บทถัดไป</a>
+              </center>
+            </p>
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>

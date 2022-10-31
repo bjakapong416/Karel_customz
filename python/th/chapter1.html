@@ -1,0 +1,277 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+    <img style ="width:75px;" src="../../images/stanford.png"/>
+    </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1; max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="width:740px; flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 1: เรามาทำความรู้จัก Karel the Robot</h1>
+            <hr />
+            <p>
+              หุ่นยนต์ Karel เป็นสิ่งที่ถูกคิดขึ้นมาเพื่อช่วยในการสอนแนวคิดในการเขียนโปรแกรมเบื้องต้น
+              เพื่อตัดปัญหาความยุ่งยากและซับซ้อนเกี่ยวกับโครงสร้างของภาษาในการโปรแกรมซึ่งถูกคิดขึ้นในปี 1970
+              โดยนักศึกษาของมหาวิทยาลัย
+              Stanford ชื่อ Rich Pattis โดยใช้แนวคิดพื้นฐานจากโครงการ Lego ของ MIT
+              ที่รูปทรงพื้นฐานมาต่อกันเพื่อสร้างเป็นวัตถุหรือโครงสร้างที่ใหญ่กว่า Rich
+              จึงเสนอให้กําหนดหุ่นยนต์ที่มีคําสั่งง่ายๆไม่กี่คําสั่งในการฝึกหัดเขียนโปรแกรม
+              เพื่อควบคุมทํางานในสิ่งแวดล้อมที่กําหนดและตั้งชื่อว่า
+              Karel ตามชื่อ Karel Capek ที่เป็นคนคิดศัพท์คําว่า robot ในภาษาอังกฤษ
+            </p>
+
+            <center>
+              <img style="width:200px;margin-bottom:10px" src="../../images/karelLarge.png" />
+            </center>
+            <p>
+              คาเรล (Karel) ค่อนข้างประสบความสำเร็จ
+              และถูกนำมาใช้ในหลักสูตรวิทยาศาสตร์คอมพิวเตอร์เบื้องต้นทั่วโลกและได้รับการสอนให้กับนักเรียนหลายล้านคน
+              อย่างไรก็ตามผู้เรียนก็จะได้เรียนรู้พื้นฐานการเขียนในรูปแบบของภาษาไพทรอน
+              และนอกจากนั้นก็จะได้เรียนรู้หลัการแนวคิดของการเขียนโปรแกรมเชิงวัตถุไปในตัว
+              แต่จะแตกต่างกันเพียงความซับซ้อนในการเขียนโปรแกรมควบคุมหุ่นยนต์ Karel
+              โปรแกรมส่วนใหญ่เป็นคําสั่งที่อยู่ในรูปแบบฟังก์ชั่น
+              (function) ที่เข้าใจง่ายและทําให้จดจําได้ง่าย ผู้เรียนจึงสามารถเรียนรู้ได้เร็ว และ่
+              ได้แนวคิดในการวิเคราะห์เพื่อแก้ปัญหาการเคลื่อนไหวของหุ่นยนต์และเทคนิคต่างๆเพื่อให้หุ่นยนต์ผ่านอุปสรรคนั้นๆ
+              โดยใช้พื้นฐานที่เป็นองค์ประกอบสําคัญที่สุดที่ใช้อยู่ในทุกภาษาซึ่งการเรียนรู้พื้นฐานการเขียนโปรแกรมในช่วงแรก
+              ดังนั้นจึงเหมาะสําหรับผู้เริ่มต้นหัดเขียนโปรแกรมเป็นย่างยิ่งเพื่อที่จะใช้ทําความเข้าใจในการเขียนโปรแกรมพื้นฐานเข้าใจโครงสร้างภาษาพื้นฐานและการลําดับแนวคิดเพื่อแก้ปัญหาก่อนที่จะเริ่มพัฒนาโปรแกรมต่อไปในอนาคต
+            </p>
+
+
+            <h3>โลกของ Karel (Karel’s World)</h3>
+            <p>
+              โลกของ Karel เป็นบริเวณที่ถูกกําหนดขึ้นเพื่อให้หุ่นยนต์ Karel อยู่ ซึ่งมีลักษณะเป็นถนนที่ Karel
+              สามารถเคลื่อนที่ไปได้ทั้งในแนวตั้ง แนวนอน แนวเหนือ-ใต้ และ แนวตะวันออก-ตะวันตก
+              ดังแสดงในรูปด้านล่าง โดยจุดกากบาทเป็นจุดตัดระหว่างถนนสองเส้น เช่นรูปในเส้นที่หนึ่งหุ่นยนต์ Karel
+              อยู่ที่หัวมุมถนนหนึ่งตัดกับหนึ่ง เป็นต้น
+              และจากรูปเราจะเห็นวัตถุสี่เหลี่ยมข้าวหลามตัดวางอยู่ตรงหน้าของหุ่นยนต์ Karel
+              วัตถุตัวนี้จะเรียกว่า beeper ซึ่งเป็นเสมือนเหรียญพลาสติกหรือก้อนหินที่มีคุณสมบัติว่าจะเกิดเสียงเมื่อ Karel
+              ไปยืนทับมันอยู่โดยเหรียญหรือก้อนหินต้องวางอยู่บนจุดตัดระหว่างถนน นอกจากนั้นในโลกของหุ่นยนต์ Karel
+              ยังมีกําแพงซึ่งมีลักษณะเป็นเส้นทึบลากตามแนวถนนและจะถูกใช้เป็นการกําหนดขอบเขตของโลกหรือสนามในการเคลื่อนที่ของหุ่นยนต์
+              Karel ซึ่งหุ่นยนต์(Karel) จะไม่สามารถเดินฝ่ากําแพงนี้ไปได้
+            </p>
+
+            <center>
+              <img style="width:350px; padding:10px" src="../../images/world.png" />
+            </center>
+
+
+
+            <h3>คำสั่งพื้นฐานควบคุมหุ่นยนต์ Karel</h3>
+            <p>หุ่นยนต์ Karel เป็นหุ่นยนต์ที่ถูกกําหนดให้สามารถทํางานพื้นฐาน
+              ซึ่งชุดคําสั่งพื้นฐานที่ใช้ควบคุมสั่งงานหุ่นยนต์ Karel
+              จะมี 4 คําสั่ง ซึ่งผู้เรียนสามารถทดลองใช้คำสั่งปุ่มคำสั่งด้านล่าง เพื่อให้ตรงกับเป้าหมายด้านล่างได้ :
+            </p>
+
+
+            <div class="section embeddedIde" id="cmd">
+              <div id='cmdIde' class="ide getStarted">
+                <div id='cmdCanvasDiv' class='commandCanvasDiv'>
+                  <div>
+                    <div class="commandCanvasTitle">World:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='cmdCanvas' style="width:175px;height:175px"></canvas>
+                    </div>
+                  </div>
+                  <div style="width:50px"></div>
+                  <div>
+                    <div class="commandCanvasTitle">Goal:</div>
+                    <div class="commandCanvasOuter">
+                      <canvas id='cmdCanvasGoal' style="width:175px;height:175px"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="commandButtons">
+                  <button id="cmdMove" class="btn btn-default btn-lg mr-10 commandButton"><code>move()</code></button>
+                  <button id="cmdTurnLeft"
+                    class="btn btn-default btn-lg mr-10 commandButton"><code>turn_left()</code></button>
+                  <button id="cmdPickBeeper"
+                    class="btn btn-default btn-lg mr-10 commandButton"><code>pick_beeper()</code></button>
+                  <button id="cmdPutBeeper"
+                    class="btn btn-default btn-lg commandButton"><code>put_beeper()</code></button>
+                </div>
+              </div>
+            </div>
+
+            <script style="width:0px;height:0px;display:none">
+
+
+
+              function examplecmd() {
+                var karelIde = null;
+                var buttonState = 'play';
+                var canvas = null;
+
+                function main() {
+                  canvas = document.getElementById('cmdCanvas');
+                  karelIde = KarelIde('java', null, canvas, 'commands', 0.9, 'en', 500, 500);
+                  $('#cmdMove').click(function () { karelIde.stepMove() });
+                  $('#cmdTurnLeft').click(function () { karelIde.stepTurnLeft() });
+                  $('#cmdPickBeeper').click(function () { karelIde.stepPickBeeper() });
+                  $('#cmdPutBeeper').click(function () { karelIde.stepPutBeeper() });
+
+                  let canvasGoal = document.getElementById('cmdCanvasGoal');
+                  let goalIde = KarelIde('java', null, canvasGoal, 'commandsGoal', 0.9, 'en', 500, 500)
+                }
+
+
+                function playClicked() {
+                  if (buttonState == 'play') {
+                    karelIde.playButton();
+
+                    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                    $('#cmdRunButton').html(resetText);
+                    buttonState = 'reset';
+                  } else if (buttonState == 'reset') {
+                    karelIde.stopButton();
+                    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                    $('#cmdRunButton').html(playText);
+                    buttonState = 'play';
+                  }
+
+                }
+
+
+                main()
+
+              }
+              examplecmd();
+            </script>
+            <p>
+              ชุดคําสั่งพื้นฐานมีดังต่อไปนี้:
+              <table class="table mt-10">
+                <tr>
+                  <th>คำสั่งพื้นฐาน</th>
+                  <th>คำอธิบาย</th>
+                </tr>
+                <tr>
+                  <td><code>move()</code></td>
+                  <td>เดินหน้า เมื่อใช้คําสั่งนี้ Karel
+                    จะเดินหน้าไปหนึ่งบล็อกหรือหนึ่งหัวมุมถนนโดยที่จะต้องไม่มีกําแพงขวางอยู่</td>
+                </tr>
+                <tr>
+                  <td><code>turn_left()</code></td>
+                  <td>หันซ้าย เมื่อใช้คำสั่งนี้ Karel จะหมุนตัวหุ่นไป 90 องศา ทางซ้ายมือเพื่อเปลี่ยนทิศการเคลื่อนที่
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>pick_beeper()</code></td>
+                  <td>หยิบเหรียญ เมื่อสั่งงาน Karel จะหยิบเหรียญตรงมุมถนนที่ Karel ยืนอยู่มาเก็บไว้
+                    โดยสามารถเก็บไว้ในตัวหุ่นได้ไม่จํากัดจํานวน</td>
+                </tr>
+                <tr>
+                  <td><code>put_beeper()</code></td>
+                  <td>วางเหรียญ เมื่อสั่งงาน Karel จะทําการนําเหรียญที่เก็บไว้ในตัว Karel วางลงที่หัวมุมถนนตรงที่ Karel
+                    ยืนอยู่ซึ่งในตัว Karel
+                    จะต้องมีเหรียญเก็บอยู่ในตัวเท่านั้น</td>
+                </tr>
+              </table>
+            </p>
+
+
+            <p>
+              การทําตามคําสั่งที่ผู้เขียนกําหนดและข้อจํากัดต่างๆของหุ่นยนต์ Karel เองเป็นสิ่งสําคัญเพื่อไม่ให้หุ่นยนต์
+              Karel
+              ทําผิดกฎที่ได้ตั้งไว้เช่น การเดินฝ่ากําแพงหรือหยิบเหรียญ/ก้อนหินในตําแหน่งที่ไม่มีเหรียญ/ก้อนหินอยู่จริง
+              ตัวโปรแกรมก็จะแสดงหน้าต่างข้อความแจ้งข้อผิดพลาดที่เกิดขึ้นให้เห็นในช่องคําสั่งของโปรแกรม
+              ดังนั้นผู้เขียนโปรแกรมจะต้องวางแผนการเคลื่อนที่ของหุ่นยนต์อย่างละเอียดรอบคอบเพราะในโลกของการใช้งานจริงถ้าวิศวกรผู้พัฒนาโปรแกรมควบคุมหุ่นยนต์ไม่ได้วางแผนหรือป้องกันการเดินหรือการเคลื่อนไหวที่ผิดพลาดของหุ่นยนต์ก็จะทําให้เกิดความเสียหายและอันตรายต่อสิ่งของที่อยู่รอบตัวหุ่นยนต์ได้
+            </p>
+
+
+
+            <p>
+              <hr />
+              <center>
+                <a class="btn btn-primary btn-lg" href="chapter2.html" role="button">บทถัดไป</a>
+              </center>
+            </p>
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>

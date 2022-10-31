@@ -1,0 +1,419 @@
+<html>
+
+<head>
+  <title>Karel Reader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <script src="../../plugins/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+  <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="../../style.css">
+
+  <script src="../../karel/js/html/websiteImports.js"></script>
+  <script>importCss();</script>
+  <script>importJs();</script>
+</head>
+
+<body>
+  <!-- container -->
+  <div class="bookContainer">
+    <!-- side bar -->
+    <div class="bookSideBar">
+      <div class="homeLink">
+        <a href="intro.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          Karel
+        </a>
+      </div>
+      <hr />
+
+      <div class="chapterTab" onclick="location.href='../../python/en/chapter1.html'">
+        <a class="bookLink btn btn-link" href="chapter1.html">
+          1 - ทำความรู้จักกับ Karel
+        </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter2.html'">
+        <a class="bookLink btn btn-link" href="chapter2.html">2 - การเขียนโปรแกรม</a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter3.html'">
+        <a class="bookLink btn btn-link" href="chapter3.html">3 - การสร้างฟังก์ชั่น </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter4.html'">
+        <a class="bookLink btn btn-link" href="chapter4.html">4 - การย่อยปัญหาออกเป็นส่วนๆ </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter5.html'">
+        <a class="bookLink btn btn-link" href="chapter5.html">5 - การวนซ้ำแบบ For Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter6.html'">
+        <a class="bookLink btn btn-link" href="chapter6.html">6 - การวนซ้ำแบบ While Loops </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter7.html'">
+        <a class="bookLink btn btn-link" href="chapter7.html">7 - การทำงานแบบมีเงื่อนไข </a>
+      </div>
+      <div class="chapterTab" onclick="location.href='../../python/th/chapter8.html'">
+        <a class="bookLink btn btn-link" href="chapter8.html">8 - การเขียนโปรแกรมเชิงระบบ</a>
+      </div>
+      <!-- <div class="chapterTab" onclick="location.href='../../python/th/chapter9.html'">
+      <a class="bookLink btn btn-link" href="chapter9.html">9 - คุณสมบัติพิเศษ</a>
+    </div> -->
+
+      <div class="chapterTab" onclick="location.href='../../python/th/reference.html'">
+        <a class="bookLink btn btn-link" href="reference.html">9 - การอ้างอิง</a>
+      </div>
+
+      <div class="chapterTab" onclick="location.href='../../python/th/ide.html'">
+        <a class="bookLink btn btn-link" href="ide.html">10 - ส่วนของโปรแกรม</a>
+      </div>
+
+      <hr />
+
+      <!--<a href="../../"><img style = "width:40px" src="../../images/unFlag.png"/> Learn more</a> -->
+
+      <!-- <center>
+    <img style ="width:75px;" src="../../images/stanford.png"/>
+    </center> -->
+    </div>
+    <!-- content -->
+    <div class="bookContent" style="display: flex;">
+      <!-- right gutter -->
+      <div style="flex-grow:1;max-width:50px;"></div>
+
+      <!-- main stuff -->
+      <div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+        <div class="row">
+          <div class="col-md-12 col-xs-12">
+
+            <h1>บทที่ 3: การสร้างฟังก์ชั่น</h1>
+            <hr />
+            <p>
+              จากบทที่ 2 ที่มีการเลี้ยวซ้าย มาทดลองสร้างฟังก์ชัน turn_right()
+            </p>
+            <h3>ตัวอย่างโปรแกรม: FirstKarel</h3>
+
+
+            <div class="section embeddedIde" id="beeperPickingRedux">
+              <div id='beeperPickingReduxIde' class="ide getStarted" style="height:302.6px">
+                <div id='beeperPickingReduxIdeCenter' class="ideCenter">
+                  <div id='beeperPickingReduxEditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                  <div id='beeperPickingReduxCanvasDiv' class='ideCanvasDiv'>
+                    <canvas id='beeperPickingReduxCanvas' class='ideCanvas'></canvas>
+                  </div>
+                </div>
+              </div>
+              <div style="width:100%;">
+                <div class="buttonBar">
+                  <button class="btn btn-default" id="beeperPickingReduxRunButton"><span
+                      class="glyphicon glyphicon-play"></span> Run Program</button>
+                </div>
+              </div>
+              <script>
+
+
+
+                function examplebeeperPickingRedux() {
+                  STARTER_CODE = `
+# File: FirstKarel.py
+# -----------------------------
+# Karel picks up a beeper and places it on a ledge.
+from karel.stanfordkarel import *
+def main() :
+   move()
+   pick_beeper()
+   move()
+   turn_left()
+   move()
+   turn_left()
+   turn_left()
+   turn_left()
+   move()
+   move()
+   put_beeper()
+   move()`
+                  // because of that extra endline at the start of the string
+                  STARTER_CODE = STARTER_CODE.trim();
+
+                  var karelIde = null;
+                  var karelEditor = null;
+                  var buttonState = 'play';
+
+                  function main() {
+                    karelEditor = importPythonEditor('beeperPickingReduxEditor', 'beeperPickingReduxEditorDiv', STARTER_CODE, false);
+                    //importRunButtonBar('example1ButtonBar');
+
+                    $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                    initTabs();
+                    var canvas = document.getElementById('beeperPickingReduxCanvas');
+                    karelIde = KarelIde('python', karelEditor, canvas, 'stepUp', 0.8, 'en');
+                    $('#beeperPickingReduxRunButton').click(function () { playClicked() });
+                    onresize();
+
+                  }
+
+                  function playClicked() {
+                    if (buttonState == 'play') {
+                      karelIde.playButton();
+
+                      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                      $('#beeperPickingReduxRunButton').html(resetText);
+                      buttonState = 'reset';
+                    } else if (buttonState == 'reset') {
+                      karelIde.stopButton();
+                      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                      $('#beeperPickingReduxRunButton').html(playText);
+                      buttonState = 'play';
+                    }
+
+                  }
+
+                  function onresize() {
+                    var parentHeight = 302.6;
+                    var canvasWidth = 300
+                    var parentWidth = $("#beeperPickingRedux").width();
+                    console.log('pw: ' + parentWidth);
+
+                    var ide = document.getElementById('beeperPickingReduxIde');
+                    var editorDiv = document.getElementById('beeperPickingReduxEditorDiv');
+                    var canvas = document.getElementById('beeperPickingReduxCanvasDiv');
+
+                    var ideHeight = parentHeight
+                    var centerHeight = ideHeight;
+
+                    var availibleWidth = parentWidth;
+                    var elementSpacing = 12;
+
+                    var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                    canvas.style.width = canvasWidth + 'px';
+                    canvas.style.height = canvasWidth + 'px';
+                    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                    editorDiv.style.left = 0 + 'px'
+                    editorDiv.style.width = editorWidth + 'px';
+                    editorDiv.style.height = parentHeight + 'px';
+                    console.log('editor width: ' + editorWidth)
+
+                    if (karelEditor) {
+                      karelEditor.renderer.onResize();
+                    }
+                  }
+                  main()
+
+                }
+                examplebeeperPickingRedux();
+              </script>
+            </div>
+            <p>
+              แม้ว่าโปรแกรม FirstKarel ข้างต้น แสดงให้เห็นว่าเป็นไปได้ที่จะใช้ตัวดำเนินการที่จะให้หุ่นยนต์คาเรลเลี้ยวขวา
+              turn_right() โดยใช้คำสั่งที่หุ่นยนต์ Karel มีเท่านั้น
+              ซึ่งกรอบแนวคิดในการออกแบบโปรแกรมอาจจะยังไม่ดีเท่าที่ควร เพราะว่าเราต้องใช้คำสั่งเพื่อทำให้หุ่นยนต์คาเรล
+              เลี้ยวซ้ายถึง 3 คำสั่ง ถึงจะทำให้ เลี้ยวขวาได้
+              เป็นไปได้หรือไม่ที่เราจะออกแบบโปรแกรมให้หุ่นยนต์คาเรลรู้จักคำสั่ง turn_right()
+              เพราะมันจะทำให้เขียนโปรแกรมได้ง่ายขึ้น สั้นลง และอ่านเข้าใจได้ง่าย
+            </p>
+            <h3>เริ่มต้นสร้างคำสั่งใหม่ให้กับหุ่นยนต์คาเรล</h3>
+            <p>
+              แน่นอนว่า ภาษาการเขียนโปรแกรมสำหรับหุ่นยนต์ Karel สามารถที่จะนิยามคำสั่งใหม่ได้
+              โดยการที่เรานำคำสั่งที่มีอยู่แล้วมารวมกัน
+              เมื่อใดก็ตามที่เรามีลำดับของคำสั่งเพื่อให้ Karel
+              ทำหน้าที่บางอย่าง เช่น การเลี้ยวขวา เราสามารถกำหนดฟังก์ชั่นใหม่ตามลำดับของคำสั่งที่มีอยู่ได้ ซึ่ง
+              รูปแบบสำหรับการกำหนดฟังก์ชั่น Karel ใหม่นั้น มีความหมายเหมือนกับ <code> main () </code>
+              ในตัวอย่างก่อนหน้านี้ซึ่งเป็นนิยามฟังก์ชันที่ถูกต้อง นิยามฟังก์ชันทั่วไปมีลักษณะเช่นนี้:
+
+
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> </code><i
+                class="demoText">name</i><code>():</code><br />
+              <i class="demoText" style="margin-left:3.5em">commands that make up the body of the function</i><br />
+            </p>
+
+            <p>
+              ดังนั้น ผู้ใช้จะสามารถสร้างฟังก์ชัน turn_right() ได้ด้วยการประกาศฟังก์ชัน turn_right() แล้วใส่คำสั่ง
+              turn_left()
+              ไว้ในฟังก์ชัน turn_right() 3 ครั้ง
+            </p>
+
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> turn_right():</code><br />
+              <code style="margin-left:3.5em">turn_left()</code><br />
+              <code style="margin-left:3.5em">turn_left()</code><br />
+              <code style="margin-left:3.5em">turn_left()</code><br />
+            </p>
+
+            <p>
+
+
+              ในกรณีเดียวกัน ถ้าต้องการสร้างฟังก์ชันเพื่อให้หุ่นยนต์คาเรลสามารถ หันกลับหลัง เราสามารถสร้างฟังก์ชัน
+              <code>turn_around()</code>
+              ได้โดยใส่คำสั่งทำการเลี้ยวซ้าย 2 ครั้งไว้ในฟังก์ชัน turn_around
+            </p>
+
+            <p class="demoCode" style="margin-left:10px">
+              <code>&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> turn_around():</code><br />
+              <code style="margin-left:3.5em">turn_left()</code><br />
+              <code style="margin-left:3.5em">turn_left()</code><br />
+            </p>
+
+            <p>
+
+              เราสามารถที่จะใช้ชื่อของฟังก์ชันใหม่ ที่เราได้สร้างขึ้นในขั้นตอนก่อนหน้ามาใช้ในส่วนของการเขียนโปรแกรมได้
+              ยกตัวอย่างเช่น เราสามารถใช้คำสั่ง <code>turn_right()</code> เพียงบรรทัดเดียว แทนการใช้คำสั่ง
+              <code>turn_left()</code> 3 ครั้ง ซึ่งจะช่วยให้ผู้อ่านเข้าใจง่าย และส่วนของโปรแกรมสั้นลง
+              สามารถดูตัวอย่างของโปรแกรมได้ดังตัวอย่างด้านล่าง
+
+            </p>
+
+
+            <div class="section embeddedIde" id="stepUp2">
+              <div id='stepUp2Ide' class="ide getStarted" style="height:409.40000000000003px">
+                <div id='stepUp2IdeCenter' class="ideCenter">
+                  <div id='stepUp2EditorDiv' class='ideEditorDiv' style="width:200px"></div>
+                  <div id='stepUp2CanvasDiv' class='ideCanvasDiv'>
+                    <canvas id='stepUp2Canvas' class='ideCanvas'></canvas>
+                  </div>
+                </div>
+              </div>
+              <div style="width:100%;">
+                <div class="buttonBar">
+                  <button class="btn btn-default" id="stepUp2RunButton"><span class="glyphicon glyphicon-play"></span>
+                    Run Program</button>
+                </div>
+              </div>
+              <script>
+
+
+
+                function examplestepUp2() {
+                  STARTER_CODE = `
+# File: BeeperPickingKarel.py
+# -----------------------------
+# The BeeperPickingKarel program defines a "main" 
+# function with three commands. These commands cause  
+# Karel to move forward one block, pick up a  
+# beeper and then move ahead to the next corner.
+from karel.stanfordkarel import *
+def main():
+   move()
+   pick_beeper()
+   move()
+   turn_left()
+   move()
+   turn_right()
+   move()
+   move()
+   put_beeper()
+   move()
+
+def turn_right():
+   turn_left()
+   turn_left()
+   turn_left()`
+                  // because of that extra endline at the start of the string
+                  STARTER_CODE = STARTER_CODE.trim();
+
+                  var karelIde = null;
+                  var karelEditor = null;
+                  var buttonState = 'play';
+
+                  function main() {
+                    karelEditor = importPythonEditor('stepUp2Editor', 'stepUp2EditorDiv', STARTER_CODE, false);
+                    //importRunButtonBar('example1ButtonBar');
+
+                    $("[title]").tooltip({ position: "bottom center", opacity: 0.9 });
+
+                    initTabs();
+                    var canvas = document.getElementById('stepUp2Canvas');
+                    karelIde = KarelIde('python', karelEditor, canvas, 'stepUp', 0.0, 'en');
+                    $('#stepUp2RunButton').click(function () { playClicked() });
+                    onresize();
+
+                  }
+
+                  function playClicked() {
+                    if (buttonState == 'play') {
+                      karelIde.playButton();
+
+                      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+                      $('#stepUp2RunButton').html(resetText);
+                      buttonState = 'reset';
+                    } else if (buttonState == 'reset') {
+                      karelIde.stopButton();
+                      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+                      $('#stepUp2RunButton').html(playText);
+                      buttonState = 'play';
+                    }
+
+                  }
+
+                  function onresize() {
+                    var parentHeight = 409.40000000000003;
+                    var canvasWidth = 300
+                    var parentWidth = $("#stepUp2").width();
+                    console.log('pw: ' + parentWidth);
+
+                    var ide = document.getElementById('stepUp2Ide');
+                    var editorDiv = document.getElementById('stepUp2EditorDiv');
+                    var canvas = document.getElementById('stepUp2CanvasDiv');
+
+                    var ideHeight = parentHeight
+                    var centerHeight = ideHeight;
+
+                    var availibleWidth = parentWidth;
+                    var elementSpacing = 12;
+
+                    var editorWidth = availibleWidth - canvasWidth - elementSpacing;
+
+                    canvas.style.width = canvasWidth + 'px';
+                    canvas.style.height = canvasWidth + 'px';
+                    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+                    editorDiv.style.left = 0 + 'px'
+                    editorDiv.style.width = editorWidth + 'px';
+                    editorDiv.style.height = parentHeight + 'px';
+                    console.log('editor width: ' + editorWidth)
+
+                    if (karelEditor) {
+                      karelEditor.renderer.onResize();
+                    }
+                  }
+                  main()
+
+                }
+                examplestepUp2();
+              </script>
+            </div>
+            <h3>เขียนฟังก์ชันให้อยู่ในกรอบ</h3>
+            <p>
+              ภาษาไพธอนใช้การย่อหน้า (Indent) ในการจัดกลุ่มคำสั่งเป็นกลุ่มๆ
+              ซึ่งกลุ่มของคำสั่งที่ถูกย่อหน้าเรียงตรงกันจะนับเป็น Code
+              Block ด้วยโครงสร้างของภาษาไพธอน ไม่อนุญาตให้ประกาศฟังก์ชันใหม่ภายในฟังก์ชันอื่นๆ ได้
+            </p>
+
+
+            <hr />
+            <center>
+              <a class="btn btn-primary btn-lg" href="chapter4.html" role="button">บทถัดไป</a>
+            </center>
+            </p>
+
+            <div style="height:60px"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- right gutter -->
+      <div style="flex-grow:4"></div>
+    </div>
+  </div>
+</body>
+
+</html>
